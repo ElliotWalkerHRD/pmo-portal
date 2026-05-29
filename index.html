@@ -222,7 +222,10 @@
   .team-tile:hover { border-bottom-color: var(--purple); }
   .team-tile::after {
     content: '';
-    display: block;
+    position: absolute;
+    bottom: 8px;
+    left: 50%;
+    transform: translateX(-50%);
     width: 18px; height: 18px;
     border-radius: 50%;
     background: var(--icon-bg);
@@ -231,11 +234,10 @@
     background-repeat: no-repeat;
     background-position: center;
     background-size: 11px;
-    margin: 8px auto 0;
     transition: background-color 0.15s, transform 0.2s;
   }
-  .team-tile:hover::after { background-color: var(--icon-bg); transform: translateY(1px); }
-  .team-tile.tile-open::after { transform: rotate(180deg); }
+  .team-tile:hover::after { background-color: var(--icon-bg); transform: translateX(-50%) translateY(1px); }
+  .team-tile.tile-open::after { transform: translateX(-50%) rotate(180deg); }
   .external-link-tile { position: relative; }
   .external-link-tile::before {
     content: '↗';
@@ -429,7 +431,7 @@
     fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
     transition: transform 0.3s;
   }
-  .accordion-header.open svg { transform: rotate(180deg); }
+  .accordion.open .accordion-header svg { transform: rotate(180deg); }
   .accordion-body { display: none; border-top: 1px solid var(--divider); padding: 14px 18px; font-size: 12px; color: var(--body); line-height: 1.7; }
   .accordion.open .accordion-body { display: block; }
   #tab-team .avatar { width: 96px; height: 96px; border-radius: 50%; font-size: 28px; display:block; margin:0 auto 14px; }
@@ -567,7 +569,10 @@
   .detail-cols-3 { display:grid; grid-template-columns:1fr 1fr 1fr; gap:16px; }
 
   /* ============ RESPONSIVE ============ */
-  @media (max-width: 768px) {
+  @media (min-width: 481px) and (max-width: 768px) {
+    .grid-3, .grid-4, .grid-5 { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 480px) {
     .grid-2, .grid-3, .grid-4, .grid-5 { grid-template-columns: 1fr; }
     .detail-cols-2, .detail-cols-3 { grid-template-columns: 1fr; }
     .impact-banner { grid-template-columns: 1fr 1fr; }
@@ -650,7 +655,7 @@
 
 <!-- DELIVERY TICKER -->
 <div style="background:#fff;border-bottom:1px solid var(--divider);overflow:hidden;padding:8px 0;">
-  <div style="display:flex;animation:tickerScroll 40s linear infinite;white-space:nowrap;width:max-content;">
+  <div id="ticker-track" style="display:flex;animation:tickerScroll 40s linear infinite;white-space:nowrap;width:max-content;">
     <div style="display:flex;align-items:center;">
     <span style="display:inline-flex;align-items:center;gap:6px;padding:0 24px;font-size:12px;font-weight:600;color:var(--muted);">
       <span style="width:6px;height:6px;border-radius:50%;background:var(--green-bright);"></span>
@@ -766,8 +771,9 @@
       <p class="section-subtitle">Click a team to learn more about what they do and how to engage with them.</p>
 
       <div class="grid-3" id="team-grid-top" style="gap:10px;margin-bottom:0;"></div>
+      <div id="team-detail-row-top" style="display:none;"></div>
       <div class="grid-4" id="team-grid-bottom" style="gap:10px;margin-top:10px;"></div>
-      <div id="team-details-container"></div>
+      <div id="team-detail-row-bottom" style="display:none;"></div>
     </div>
 
     <div class="section-divider"></div>
@@ -803,10 +809,9 @@
       <div class="section-label">Impact</div>
       <h2 class="section-title">What happens when we get involved</h2>
       <div style="position:relative;overflow:hidden;border-radius:var(--radius-sm);">
-        <div id="testimonial-track" style="display:flex;transition:transform 0.5s ease;">
-          
-        <div id="testimonial-dots" style="display:flex;justify-content:center;gap:8px;margin-top:14px;"></div>
+        <div id="testimonial-track" style="display:flex;transition:transform 0.5s ease;"></div>
       </div>
+      <div id="testimonial-dots" style="display:flex;justify-content:center;gap:8px;margin-top:14px;"></div>
     </div>
 
     <div class="section-divider"></div>
@@ -918,17 +923,14 @@
       <div class="section-label">Delivery Feed</div>
       <h2 class="section-title" style="margin-bottom:6px;">What we've been delivering</h2>
       <p class="section-subtitle">A running log of what's shipped, what's changed, and what's hit a milestone.</p>
-      <div id="feed-dynamic-entries"></div>
-
-<div class="feed-filters">
+      <div class="feed-filters">
         <button class="feed-filter active" onclick="filterFeed('all', this)">All</button>
         <button class="feed-filter" onclick="filterFeed('shipped', this)">Shipped</button>
         <button class="feed-filter" onclick="filterFeed('milestone', this)">Milestones</button>
         <button class="feed-filter" onclick="filterFeed('process', this)">Process</button>
         <button class="feed-filter" onclick="filterFeed('capability', this)">New Capability</button>
       </div>
-
-      
+      <div id="feed-dynamic-entries"></div>
     </div>
   </div>
 
@@ -1769,12 +1771,13 @@
           <div style="font-size:10px;font-weight:700;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-bottom:5px;">Description</div>
           <textarea class="modal-input" id="admin-feed-desc" rows="3" placeholder="Brief summary..." style="resize:vertical;margin-bottom:12px;"></textarea>
           <div style="font-size:10px;font-weight:700;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-bottom:5px;">Type</div>
-          <select class="modal-input" id="admin-feed-type" style="margin-bottom:18px;">
+          <select class="modal-input" id="admin-feed-type" style="margin-bottom:12px;">
             <option value="milestone">Milestone</option>
             <option value="shipped">Shipped</option>
             <option value="process">Process</option>
             <option value="capability">New Capability</option>
           </select>
+          <label style="display:flex;align-items:center;gap:8px;font-size:12px;font-weight:600;color:var(--heading);cursor:pointer;margin-bottom:18px;"><input type="checkbox" id="admin-feed-upcoming" style="accent-color:var(--purple);width:15px;height:15px;"> Upcoming announcement</label>
           <button id="admin-feed-submit-btn" onclick="submitAdminFeedEntry()" style="width:100%;padding:9px;border:none;border-radius:var(--radius-sm);background:var(--purple);color:#fff;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;">Add to Feed</button>
         </div>
         <div id="admin-feed-list" style="margin-top:12px;"></div>
@@ -1924,9 +1927,9 @@ function toggleAccordion(btn) {
 }
 
 function filterFeed(type, btn) {
-  document.querySelectorAll('.feed-filter').forEach(f => f.classList.remove('active'));
+  document.querySelectorAll('.feed-filter').forEach(function(f) { f.classList.remove('active'); });
   btn.classList.add('active');
-  document.querySelectorAll('.feed-entry').forEach(entry => {
+  document.querySelectorAll('.feed-entry').forEach(function(entry) {
     entry.style.display = (type === 'all' || entry.dataset.type === type) ? 'flex' : 'none';
   });
 }
@@ -1966,14 +1969,20 @@ function toggleTeamSpace(id) {
 
 // Team detail toggle
 function toggleTeamDetail(id) {
-  var panels = document.querySelectorAll('.team-detail');
   var target = document.getElementById('detail-' + id);
-  var isVisible = target.style.display === 'block';
-  panels.forEach(function(p) { p.style.display = 'none'; });
+  var isVisible = target && target.style.display === 'block';
+  document.querySelectorAll('.team-detail').forEach(function(p) { p.style.display = 'none'; });
   document.querySelectorAll('.team-tile').forEach(function(t) { t.classList.remove('tile-open'); });
-  if (!isVisible) {
+  var rowTop = document.getElementById('team-detail-row-top');
+  var rowBot = document.getElementById('team-detail-row-bottom');
+  if (rowTop) rowTop.style.display = 'none';
+  if (rowBot) rowBot.style.display = 'none';
+  if (!isVisible && target) {
     target.style.display = 'block';
-    target.scrollIntoView({behavior: 'smooth', block: 'nearest'});
+    var teams = loadTeamsData();
+    var team = teams.find(function(t) { return t.id === id; });
+    var rowEl = (team && team.row === 'top') ? rowTop : rowBot;
+    if (rowEl) { rowEl.style.display = 'block'; rowEl.scrollIntoView({behavior:'smooth',block:'nearest'}); }
     var tile = document.querySelector('.team-tile[onclick*="' + id + '"]');
     if (tile) tile.classList.add('tile-open');
   }
@@ -2220,7 +2229,7 @@ function loadFeedEntries() {
 
 function deleteFeedEntry(id) {
   localStorage.setItem('pmo_feed_entries', JSON.stringify(loadFeedEntries().filter(function(e) { return e.id !== id; })));
-  renderFeedEntries();
+  renderFeedEntries(); renderTicker();
 }
 
 var feedTypeConfig = {
@@ -2230,29 +2239,81 @@ var feedTypeConfig = {
   capability: { dot: ' feed-dot-orange', tag: 'New Capability',cls: 'feed-tag-capability' }
 };
 
+function _buildFeedEntry(e) {
+  var c = feedTypeConfig[e.type] || feedTypeConfig.milestone;
+  return '<div class="feed-entry" data-type="' + escHtml(e.type) + '">' +
+    '<div class="feed-timeline"><div class="feed-dot' + c.dot + '"></div><div class="feed-line"></div></div>' +
+    '<div class="feed-content">' +
+      '<div class="feed-date">' + escHtml(e.date) + '</div>' +
+      '<div class="feed-title">' + escHtml(e.title) + '</div>' +
+      (e.desc ? '<div class="feed-desc">' + escHtml(e.desc) + '</div>' : '') +
+      '<div style="display:flex;align-items:center;gap:8px;">' +
+        '<div class="feed-tag ' + c.cls + '">' + c.tag + '</div>' +
+      '</div>' +
+    '</div></div>';
+}
 function renderFeedEntries() {
   var entries = loadFeedEntries().filter(function(e) { return !e.archived; });
   var el = document.getElementById('feed-dynamic-entries');
   if (!el) return;
-  if (!entries.length) { el.innerHTML = ''; return; }
-  var html = '<div class="feed-month" style="margin-top:0;">Recent additions</div>';
-  entries.forEach(function(e) {
-    var c = feedTypeConfig[e.type] || feedTypeConfig.milestone;
-    html += '<div class="feed-entry" data-type="' + escHtml(e.type) + '">' +
-      '<div class="feed-timeline"><div class="feed-dot' + c.dot + '"></div><div class="feed-line"></div></div>' +
-      '<div class="feed-content">' +
-        '<div class="feed-date">' + escHtml(e.date) + '</div>' +
-        '<div class="feed-title">' + escHtml(e.title) + '</div>' +
-        (e.desc ? '<div class="feed-desc">' + escHtml(e.desc) + '</div>' : '') +
-        '<div style="display:flex;align-items:center;gap:8px;">' +
-          '<div class="feed-tag ' + c.cls + '">' + c.tag + '</div>' +
-          '<button onclick="deleteFeedEntry(' + e.id + ')" style="font-size:10px;color:var(--muted);background:none;border:none;cursor:pointer;padding:0;font-family:inherit;">&#215; Remove</button>' +
-        '</div>' +
-      '</div></div>';
+  if (!entries.length) { el.innerHTML = '<div style="font-size:12px;color:var(--very-muted);font-style:italic;padding:20px 0;">No feed entries yet.</div>'; return; }
+  var upcoming = entries.filter(function(e) { return !!e.upcoming; });
+  var past = entries.filter(function(e) { return !e.upcoming; });
+  var MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  function parseGroup(d) {
+    var lc=(d||'').toLowerCase();
+    for(var i=0;i<MONTHS.length;i++){
+      if(lc.indexOf(MONTHS[i].toLowerCase())!==-1){
+        var yr=(lc.match(/\d{4}/)||[''])[0];
+        return{label:MONTHS[i]+(yr?' '+yr:''),key:(yr||'9999')+'-'+(i<9?'0':''+(i+1))};
+      }
+    }
+    return{label:d||'Other',key:'0000-00'};
+  }
+  var html='';
+  if(upcoming.length){
+    html+='<div class="feed-month" style="margin-top:0;color:#B54708;background:#FFFAEB;border-color:#FEDF89;border-radius:4px;padding:8px 12px;">Upcoming announcements</div>';
+    upcoming.forEach(function(e){html+=_buildFeedEntry(e);});
+  }
+  var groups={};
+  past.forEach(function(e){var g=parseGroup(e.date);if(!groups[g.key])groups[g.key]={label:g.label,entries:[]};groups[g.key].entries.push(e);});
+  Object.keys(groups).sort(function(a,b){return b.localeCompare(a);}).forEach(function(key,gi){
+    html+='<div class="feed-month"'+(gi===0&&!upcoming.length?' style="margin-top:0;"':'')+'>' + escHtml(groups[key].label) + '</div>';
+    groups[key].entries.forEach(function(e){html+=_buildFeedEntry(e);});
   });
-  el.innerHTML = html;
+  el.innerHTML=html;
 }
 
+function renderTicker() {
+  var track = document.getElementById('ticker-track');
+  if (!track) return;
+  var entries = loadFeedEntries().filter(function(e) { return !e.archived; });
+  if (!entries.length) return;
+  var tickerColors = {
+    milestone:  { dot: '#6941C6', color: '#6941C6', label: 'MILESTONE' },
+    shipped:    { dot: '#17B26A', color: '#067647', label: 'SHIPPED' },
+    process:    { dot: '#3B82F6', color: '#2563EB', label: 'PROCESS' },
+    capability: { dot: '#F59E0B', color: '#DC6803', label: 'CAPABILITY' }
+  };
+  function buildItems() {
+    return entries.map(function(e) {
+      var tc = tickerColors[e.type] || tickerColors.milestone;
+      var dot = e.upcoming ? '#F59E0B' : tc.dot;
+      var col = e.upcoming ? '#B54708' : tc.color;
+      var lbl = e.upcoming ? 'UPCOMING' : tc.label;
+      return '<span style="display:inline-flex;align-items:center;gap:6px;padding:0 24px;font-size:12px;font-weight:600;color:var(--muted);">' +
+        '<span style="width:6px;height:6px;border-radius:50%;background:' + dot + ';flex-shrink:0;"></span>' +
+        '<strong style="color:' + col + ';">' + escHtml(lbl) + '</strong> ' + escHtml(e.title) +
+        '</span><span style="color:var(--divider);">|</span>';
+    }).join('');
+  }
+  var items = buildItems();
+  var speed = Math.max(20, entries.length * 7);
+  track.style.animationDuration = speed + 's';
+  track.innerHTML =
+    '<div style="display:flex;align-items:center;">' + items + '</div>' +
+    '<div style="display:flex;align-items:center;">' + items + '</div>';
+}
 
 // ---- Team Tile Functions (Team tab - public-facing profiles) ----
 function toggleTeamTile(id) {
@@ -2465,7 +2526,7 @@ function renderTeamGrids() {
   function tileHtml(team) {
     var ib = (team.color !== '#6941C6') ? 'background:' + team.colorBg + ';border-color:' + team.colorBorder + ';' : '';
     var ss = (team.color !== '#6941C6') ? 'stroke:' + team.color + ';' : '';
-    return '<div class="card card-hover team-tile" style="padding:18px;cursor:pointer;" onclick="toggleTeamDetail(\'' + team.id + '\')">' +
+    return '<div class="card card-hover team-tile" style="padding:18px 18px 34px;cursor:pointer;" onclick="toggleTeamDetail(\'' + team.id + '\')">' +
       '<div style="display:flex;justify-content:center;margin-bottom:8px;"><div class="icon-circle icon-circle-lg"' + (ib ? ' style="' + ib + '"' : '') + '>' +
         '<svg' + (ss ? ' style="' + ss + '"' : '') + '><use href="#' + escHtml(team.iconId||'i-layers') + '"/></svg>' +
       '</div></div>' +
@@ -2476,16 +2537,25 @@ function renderTeamGrids() {
   }
   var topGrid    = document.getElementById('team-grid-top');
   var bottomGrid = document.getElementById('team-grid-bottom');
-  var detailCont = document.getElementById('team-details-container');
+  var rowTop = document.getElementById('team-detail-row-top');
+  var rowBot = document.getElementById('team-detail-row-bottom');
   if (topGrid) topGrid.innerHTML = topTeams.map(tileHtml).join('');
   if (bottomGrid) { bottomGrid.className = 'grid-' + (bottomTeams.length <= 3 ? '3' : '4'); bottomGrid.style.gap = '10px'; bottomGrid.style.marginTop = '10px'; bottomGrid.innerHTML = bottomTeams.map(tileHtml).join(''); }
-  if (detailCont) {
-    var allT = topTeams.concat(bottomTeams);
-    detailCont.innerHTML = allT.map(function(team) {
+  if (rowTop) {
+    rowTop.innerHTML = topTeams.map(function(team) {
       var m = (byTeam[team.id]||[]).slice().sort(function(a,b){return(a.sortOrder||99)-(b.sortOrder||99);});
       return buildTeamDetailPanel(team, m);
     }).join('');
-    allT.forEach(function(t) { renderTeamTile(t.id); });
+    topTeams.forEach(function(t) { renderTeamTile(t.id); });
+    rowTop.style.display = 'none';
+  }
+  if (rowBot) {
+    rowBot.innerHTML = bottomTeams.map(function(team) {
+      var m = (byTeam[team.id]||[]).slice().sort(function(a,b){return(a.sortOrder||99)-(b.sortOrder||99);});
+      return buildTeamDetailPanel(team, m);
+    }).join('');
+    bottomTeams.forEach(function(t) { renderTeamTile(t.id); });
+    rowBot.style.display = 'none';
   }
   document.querySelectorAll('.team-detail').forEach(function(d){d.style.display='none';});
   document.querySelectorAll('.team-tile').forEach(function(t){t.classList.remove('tile-open');});
@@ -2691,7 +2761,7 @@ function renderFaqEntries() {
   var html = '';
   entries.forEach(function(e) {
     html += '<div class="accordion" onclick="this.classList.toggle(\'open\')" style="margin-bottom:6px;">' +
-      '<div class="accordion-header"><span>' + escHtml(e.question) + '</span>' + teamBadgeHtml(e.team) + '<svg class="accordion-icon"><use href="#i-chevron"/></svg></div>' +
+      '<div class="accordion-header"><span>' + escHtml(e.question) + '</span>' + teamBadgeHtml(e.team) + '<svg class="accordion-icon"><use href="#i-chevdown"/></svg></div>' +
       '<div class="accordion-body">' + escHtml(e.answer) + '</div>' +
     '</div>';
   });
@@ -2972,6 +3042,7 @@ function editFeedEntry(id) {
   document.getElementById('admin-feed-title').value = e.title || '';
   document.getElementById('admin-feed-desc').value = e.desc || '';
   document.getElementById('admin-feed-type').value = e.type || 'milestone';
+  var _ecb = document.getElementById('admin-feed-upcoming'); if (_ecb) _ecb.checked = !!e.upcoming;
   var btn = document.getElementById('admin-feed-submit-btn');
   if (btn) btn.textContent = 'Update Entry';
   document.getElementById('admin-feed-date').scrollIntoView({behavior:'smooth',block:'center'});
@@ -2981,7 +3052,7 @@ function editFeedEntry(id) {
 function archiveFeedEntry(id) {
   var entries = loadFeedEntries().map(function(e) { return e.id === id ? Object.assign({}, e, {archived: !e.archived}) : e; });
   localStorage.setItem('pmo_feed_entries', JSON.stringify(entries));
-  renderFeedEntries(); renderAdminFeedList();
+  renderFeedEntries(); renderAdminFeedList(); renderTicker();
 }
 
 function cancelFeedEdit() {
@@ -2990,6 +3061,7 @@ function cancelFeedEdit() {
   document.getElementById('admin-feed-title').value = '';
   document.getElementById('admin-feed-desc').value = '';
   document.getElementById('admin-feed-type').value = 'milestone';
+  var _fcb = document.getElementById('admin-feed-upcoming'); if (_fcb) _fcb.checked = false;
   var btn = document.getElementById('admin-feed-submit-btn');
   if (btn) btn.textContent = 'Add to Feed';
 }
@@ -3040,21 +3112,22 @@ function submitAdminFeedEntry() {
   var title = document.getElementById('admin-feed-title').value.trim();
   var desc = document.getElementById('admin-feed-desc').value.trim();
   var type = document.getElementById('admin-feed-type').value;
+  var upcoming = !!(document.getElementById('admin-feed-upcoming') && document.getElementById('admin-feed-upcoming').checked);
   if (!date || !title) { alert('Date and title are required.'); return; }
   var entries = loadFeedEntries();
   if (editingFeedId !== null) {
-    entries = entries.map(function(e) { return e.id === editingFeedId ? Object.assign({}, e, {date:date,title:title,desc:desc,type:type}) : e; });
+    entries = entries.map(function(e) { return e.id === editingFeedId ? Object.assign({}, e, {date:date,title:title,desc:desc,type:type,upcoming:upcoming}) : e; });
     editingFeedId = null;
     var btn = document.getElementById('admin-feed-submit-btn');
     if (btn) btn.textContent = 'Add to Feed';
   } else {
-    entries.unshift({ date: date, title: title, desc: desc, type: type, id: Date.now(), createdAt: Date.now() });
+    entries.unshift({ date: date, title: title, desc: desc, type: type, upcoming: upcoming, id: Date.now(), createdAt: Date.now() });
   }
   localStorage.setItem('pmo_feed_entries', JSON.stringify(entries));
   document.getElementById('admin-feed-date').value = '';
   document.getElementById('admin-feed-title').value = '';
   document.getElementById('admin-feed-desc').value = '';
-  renderFeedEntries(); renderAdminFeedList();
+  renderFeedEntries(); renderAdminFeedList(); renderTicker();
 }
 // Init on load
 document.addEventListener('DOMContentLoaded', function() {
@@ -3170,6 +3243,7 @@ document.addEventListener('DOMContentLoaded', function() {
   // Render feed entries
   renderFeedEntries();
   renderAdminFeedList();
+  renderTicker();
   renderAdminTeamsList();
   renderAdminPeopleList();
 

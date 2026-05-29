@@ -839,7 +839,19 @@
       <p style="font-size:12px;color:var(--very-muted);margin-top:10px;">Opens in Slack</p>
     </div>
 
+  </div>
+
+  <!-- ======================== TEAM TAB ======================== -->
+  <div id="tab-team" class="tab-content">
+    <div class="section">
+      <div class="section-label">The PMO Team</div>
+      <h2 class="section-title" id="people-count-heading">People across the PMO</h2>
+      <p class="section-subtitle">Everyone delivering project leadership across Hard Rock Digital.</p>
+      <div class="grid-3" style="gap:16px;" id="people-grid"></div>
+    </div>
+
     <div id="admin-panel-people" class="admin-subpanel">
+      <div style="border-top:1px solid var(--divider);margin:0 0 28px;"></div>
       <!-- TEAMS -->
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
         <div>
@@ -879,7 +891,7 @@
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
         <div>
           <div style="font-size:15px;font-weight:800;color:var(--heading);">People</div>
-          <div style="font-size:11px;color:var(--muted);margin-top:2px;">Manage team members shown in the Team tab.</div>
+          <div style="font-size:11px;color:var(--muted);margin-top:2px;">Manage team members shown in the PMO Team tab.</div>
         </div>
         <button class="btn-primary" onclick="showAddPersonForm()">+ Add Person</button>
       </div>
@@ -902,19 +914,6 @@
         </div>
       </div>
     </div>
-  </div>
-
-  <!-- ======================== TEAM TAB ======================== -->
-  <div id="tab-team" class="tab-content">
-    <div class="section">
-      <div class="section-label">The PMO Team</div>
-      <h2 class="section-title" id="people-count-heading">People across the PMO</h2>
-      <p class="section-subtitle">Everyone delivering project leadership across Hard Rock Digital.</p>
-
-      <div class="grid-3" style="gap:16px;" id="people-grid"></div>
-      </div>
-    </div>
-
   </div>
 
   <!-- ======================== FEED TAB ======================== -->
@@ -1889,6 +1888,11 @@ function doSwitchTab(tabId, btn) {
   const tab = document.getElementById('tab-' + tabId);
   if (tab) tab.classList.add('active');
   if (btn) btn.classList.add('active');
+  // Show people management panel on team tab if admin is unlocked
+  if (tabId === 'team' && adminUnlocked) {
+    var pp = document.getElementById('admin-panel-people');
+    if (pp) { pp.classList.add('active'); renderAdminTeamsList(); renderAdminPeopleList(); }
+  }
   window.scrollTo({ top: 0, behavior: 'smooth' });
   requestAnimationFrame(() => {
     document.querySelectorAll('#tab-' + tabId + ' .fade-in').forEach(el => el.classList.add('visible'));
@@ -1951,11 +1955,17 @@ function toggleWorkflowDetail(id) {
 
 // Admin sub-panel nav
 function switchAdminPanel(panelId, btn) {
+  if (panelId === 'people') {
+    // People & Teams lives on the PMO Team tab — navigate there and reveal the panel
+    doSwitchTab('team', document.querySelector('.tab-btn[onclick*="team"]'));
+    var panel = document.getElementById('admin-panel-people');
+    if (panel) { panel.classList.add('active'); renderAdminTeamsList(); renderAdminPeopleList(); }
+    return;
+  }
   document.querySelectorAll('.admin-subpanel').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.admin-subnav-btn').forEach(b => b.classList.remove('active'));
   document.getElementById('admin-panel-' + panelId).classList.add('active');
   btn.classList.add('active');
-  if (panelId === 'people') { renderAdminTeamsList(); renderAdminPeopleList(); }
 }
 
 // Team space expand/collapse

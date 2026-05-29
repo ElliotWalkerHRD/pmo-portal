@@ -1872,15 +1872,33 @@
       <span style="display:inline-block;background:var(--purple);border-radius:6px;padding:4px 14px;font-size:10px;font-weight:800;color:#fff;letter-spacing:2px;text-transform:uppercase;">PMO</span>
     </div>
     <h3>Always in Delivery Mode.</h3>
-    <p class="tagline">Last updated: 21 May 2026.</p>
+    <p class="tagline">Last updated: <span id="last-updated-date">29 May 2026</span>.</p>
     <p class="links">#hrd-pmo &nbsp;|&nbsp; Confluence: HRDPMO &nbsp;|&nbsp; Dashboard: pmo.hrd-usa.com</p>
   </div>
 
 </div>
 
 <script>
+// Bumped automatically on each code push — do not edit by hand
+var CODE_DEPLOY_DATE = '2026-05-29';
+
 let adminUnlocked = false;
 let pendingAdminBtn = null;
+
+function touchLastUpdated() {
+  localStorage.setItem('pmo_last_updated', String(Date.now()));
+  renderLastUpdated();
+}
+function renderLastUpdated() {
+  var el = document.getElementById('last-updated-date');
+  if (!el) return;
+  var stored = parseInt(localStorage.getItem('pmo_last_updated') || '0', 10);
+  var codeMs = new Date(CODE_DEPLOY_DATE).getTime();
+  var ms = Math.max(stored, codeMs);
+  var d = new Date(ms);
+  var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  el.textContent = d.getDate() + ' ' + months[d.getMonth()] + ' ' + d.getFullYear();
+}
 
 function doSwitchTab(tabId, btn) {
   document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
@@ -2239,7 +2257,7 @@ function loadFeedEntries() {
 
 function deleteFeedEntry(id) {
   localStorage.setItem('pmo_feed_entries', JSON.stringify(loadFeedEntries().filter(function(e) { return e.id !== id; })));
-  renderFeedEntries(); renderTicker();
+  renderFeedEntries(); renderTicker(); touchLastUpdated();
 }
 
 var feedTypeConfig = {
@@ -2461,9 +2479,9 @@ function renderTeamTile(id) {
 // ======================== TEAM / PEOPLE DATA ========================
 
 function loadTeamsData() { try { return JSON.parse(localStorage.getItem('pmo_teams') || '[]'); } catch(e) { return []; } }
-function saveTeamsData(t) { _teamsCache = null; localStorage.setItem('pmo_teams', JSON.stringify(t)); }
+function saveTeamsData(t) { _teamsCache = null; localStorage.setItem('pmo_teams', JSON.stringify(t)); touchLastUpdated(); }
 function loadPeopleData() { try { return JSON.parse(localStorage.getItem('pmo_people') || '[]'); } catch(e) { return []; } }
-function savePeopleData(p) { localStorage.setItem('pmo_people', JSON.stringify(p)); }
+function savePeopleData(p) { localStorage.setItem('pmo_people', JSON.stringify(p)); touchLastUpdated(); }
 
 var _teamsCache = null;
 function getTeamsMap() {
@@ -2760,7 +2778,7 @@ function deletePersonAdmin(id) {
 // ======================== FAQ ========================
 
 function loadFaqEntries() { try { return JSON.parse(localStorage.getItem('pmo_faq_entries') || '[]'); } catch(e) { return []; } }
-function saveFaqEntries(entries) { localStorage.setItem('pmo_faq_entries', JSON.stringify(entries)); }
+function saveFaqEntries(entries) { localStorage.setItem('pmo_faq_entries', JSON.stringify(entries)); touchLastUpdated(); }
 function deleteFaqEntry(id) { saveFaqEntries(loadFaqEntries().filter(function(e) { return e.id !== id; })); renderFaqEntries(); renderAdminFaqList(); }
 
 function renderFaqEntries() {
@@ -2889,7 +2907,7 @@ function submitAdminFaq() {
 // ======================== IMPACT ========================
 
 function loadImpactEntries() { try { return JSON.parse(localStorage.getItem('pmo_impact_entries') || '[]'); } catch(e) { return []; } }
-function saveImpactEntries(entries) { localStorage.setItem('pmo_impact_entries', JSON.stringify(entries)); }
+function saveImpactEntries(entries) { localStorage.setItem('pmo_impact_entries', JSON.stringify(entries)); touchLastUpdated(); }
 function deleteImpactEntry(id) { saveImpactEntries(loadImpactEntries().filter(function(e) { return e.id !== id; })); renderImpactEntries(); renderAdminImpactList(); }
 
 var IMPACT_STATUS_CONFIG = {
@@ -3062,7 +3080,7 @@ function editFeedEntry(id) {
 function archiveFeedEntry(id) {
   var entries = loadFeedEntries().map(function(e) { return e.id === id ? Object.assign({}, e, {archived: !e.archived}) : e; });
   localStorage.setItem('pmo_feed_entries', JSON.stringify(entries));
-  renderFeedEntries(); renderAdminFeedList(); renderTicker();
+  renderFeedEntries(); renderAdminFeedList(); renderTicker(); touchLastUpdated();
 }
 
 function cancelFeedEdit() {
@@ -3137,7 +3155,7 @@ function submitAdminFeedEntry() {
   document.getElementById('admin-feed-date').value = '';
   document.getElementById('admin-feed-title').value = '';
   document.getElementById('admin-feed-desc').value = '';
-  renderFeedEntries(); renderAdminFeedList(); renderTicker();
+  renderFeedEntries(); renderAdminFeedList(); renderTicker(); touchLastUpdated();
 }
 // Init on load
 document.addEventListener('DOMContentLoaded', function() {
@@ -3254,6 +3272,7 @@ document.addEventListener('DOMContentLoaded', function() {
   renderFeedEntries();
   renderAdminFeedList();
   renderTicker();
+  renderLastUpdated();
   renderAdminTeamsList();
   renderAdminPeopleList();
 

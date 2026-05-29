@@ -2385,7 +2385,6 @@ function renderTeamTile(id) {
 
   el.innerHTML = any ? html : '<div style="font-size:11px;color:var(--very-muted);font-style:italic;padding:8px 0;">No content yet — click Edit to fill out this team profile.</div>';
 }
-}
 
 // ======================== TEAM / PEOPLE DATA ========================
 
@@ -2799,7 +2798,6 @@ function submitAdminFaq() {
   renderPeopleGrid();
   renderFaqEntries(); renderAdminFaqList();
 }
-}
 
 // ======================== IMPACT ========================
 
@@ -2957,7 +2955,6 @@ function submitAdminImpact() {
   document.getElementById('admin-impact-team').value = 'all';
   renderImpactEntries(); renderAdminImpactList();
 }
-}
 
 function editFeedEntry(id) {
   var entries = loadFeedEntries();
@@ -3052,7 +3049,7 @@ function submitAdminFeedEntry() {
   document.getElementById('admin-feed-desc').value = '';
   renderFeedEntries(); renderAdminFeedList();
 }
-// Init on load// Init on load
+// Init on load
 document.addEventListener('DOMContentLoaded', function() {
   // Render team tile content
   ['central','techpmo','casino','international','marketing','data','assurance'].forEach(renderTeamSpace);

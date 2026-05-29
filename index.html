@@ -1711,14 +1711,24 @@
       <div id="content-section-feed" class="section">
         <div class="section-label">Delivery Feed</div>
         <h2 class="section-title">Add a feed entry</h2>
-        <p class="section-subtitle">Add updates to the public-facing delivery feed.</p>
+        <p class="section-subtitle">Announcement-quality moments only — things the wider organisation would actually care about.</p>
+        <div style="display:flex;gap:16px;flex-wrap:wrap;margin-bottom:16px;">
+          <div style="flex:1;min-width:200px;background:#F0FDF4;border:1px solid #BBF7D0;border-radius:var(--radius-sm);padding:12px 14px;">
+            <div style="font-size:10px;font-weight:800;color:#15803D;letter-spacing:1px;text-transform:uppercase;margin-bottom:6px;">✓ Add these</div>
+            <div style="font-size:11px;color:#166534;line-height:1.6;">Major product or feature launches<br>Project go-live dates agreed<br>Project kickoffs<br>Significant regulatory or commercial milestones<br>Programmes taken on via PMO intake</div>
+          </div>
+          <div style="flex:1;min-width:200px;background:#FEF2F2;border:1px solid #FECACA;border-radius:var(--radius-sm);padding:12px 14px;">
+            <div style="font-size:10px;font-weight:800;color:#DC2626;letter-spacing:1px;text-transform:uppercase;margin-bottom:6px;">✗ Not these</div>
+            <div style="font-size:11px;color:#991B1B;line-height:1.6;">Internal draft circulations<br>Tooling or template updates<br>Dev environment or sandbox access<br>Metrics or data agreed internally<br>Incremental process refinements</div>
+          </div>
+        </div>
         <div class="card" style="padding:20px;">
           <div style="font-size:10px;font-weight:700;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-bottom:5px;">Date</div>
-          <input type="text" class="modal-input" id="admin-feed-date" placeholder="e.g. 28 May" style="margin-bottom:12px;">
+          <input type="text" class="modal-input" id="admin-feed-date" placeholder="e.g. 28 May 2026" style="margin-bottom:12px;">
           <div style="font-size:10px;font-weight:700;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-bottom:5px;">Title</div>
-          <input type="text" class="modal-input" id="admin-feed-title" placeholder="What was delivered or achieved?" style="margin-bottom:12px;">
+          <input type="text" class="modal-input" id="admin-feed-title" placeholder="Project — What was launched or achieved?" style="margin-bottom:12px;">
           <div style="font-size:10px;font-weight:700;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-bottom:5px;">Description</div>
-          <textarea class="modal-input" id="admin-feed-desc" rows="3" placeholder="Brief summary..." style="resize:vertical;margin-bottom:12px;"></textarea>
+          <textarea class="modal-input" id="admin-feed-desc" rows="3" placeholder="One or two sentences. What happened, why it matters." style="resize:vertical;margin-bottom:12px;"></textarea>
           <div style="font-size:10px;font-weight:700;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-bottom:5px;">Type</div>
           <select class="modal-input" id="admin-feed-type" style="margin-bottom:12px;">
             <option value="milestone">Milestone</option>
@@ -2657,7 +2667,7 @@ function renderPeopleGrid() {
     '</div>';
   }).join('');
   var h = document.getElementById('people-count-heading');
-  if (h) { var allTids=[]; people.forEach(function(p){getPersonTeamIds(p).forEach(function(t){allTids.push(t);});}); var tc=new Set(allTids).size; h.textContent = people.length + ' people across ' + tc + ' teams'; }
+  if (h) { var tc = loadTeamsData().length; h.textContent = people.length + ' people across ' + tc + ' teams'; }
   people.forEach(function(p) { renderPersonCard(p.id); });
   renderHeroStats();
 }
@@ -3284,28 +3294,21 @@ document.addEventListener('DOMContentLoaded', function() {
     }));
   }
 
-  // Seed feed entries if none exist (version key prevents overwriting user data)
-  if (!localStorage.getItem('pmo_feed_v1') && !JSON.parse(localStorage.getItem('pmo_feed_entries')||'[]').length) {
+  // Seed feed entries — v2 trims to announcement-quality entries only
+  if (!localStorage.getItem('pmo_feed_v2') && !JSON.parse(localStorage.getItem('pmo_feed_entries')||'[]').length) {
     localStorage.setItem('pmo_feed_entries', JSON.stringify([
-      { id:1, date:'12 May', title:'Crypto — IL regulatory approval confirmed by IGB', desc:'Illinois Gaming Board signed off on crypto deposits via licensed money transmitter (Zero Hash). IL confirmed as first launch state. This was the key regulatory gating item.', type:'milestone', createdAt:1747008000000 },
-      { id:2, date:'12 May', title:'Crypto — 31 Aug go-live agreed with working group', desc:'Feasible and fair target confirmed. Opportunity to bring forward if Haley can start dev late May. 6 key decisions made in a single session.', type:'milestone', createdAt:1747008000000 },
-      { id:3, date:'12 May', title:'HRD Hackathon — Taken in via PMO intake', desc:'Cross-functional AI hackathon accepted through the intake process. PMO providing project leadership for planning, logistics, and delivery coordination.', type:'milestone', createdAt:1747008000000 },
-      { id:4, date:'7 May', title:'Crypto — NJ draft circulated to key stakeholders', desc:'Jess circulated NJ regulatory draft for review. Adding Zero Hash comments from DGE discussions. NJ remains longer-term target.', type:'milestone', createdAt:1746576000000 },
-      { id:5, date:'4 May', title:'EDD — Phase 1 delivery date locked at 21 Jul', desc:'Ellen confirmed she can lock in dev team for 21 Jul. NATS EDD tab redesign included in Phase 1 build. Cohort-based rollout agreed.', type:'milestone', createdAt:1746316800000 },
-      { id:6, date:'1 May', title:'PMO Toolkit — v1.3 shipped with 17-section weekly status', desc:'Replaced PPTX deck and HTML report with a single Confluence-based weekly status. Smart Gather Check, RAG delta detection, automated PM notifications.', type:'capability', createdAt:1746057600000 },
-      { id:7, date:'28 Apr', title:'Crypto — Integration unblocked, sandbox access live', desc:'Pay.com sandbox and docs delivered. Team can start building. Commercial model better than expected — Danny presenting to Mike.', type:'milestone', createdAt:1745798400000 },
-      { id:8, date:'28 Apr', title:'EDD — Baseline metrics and Data Readiness Matrix agreed', desc:'First measurable targets for the programme. Process map completed by Jeff. Rich and Jeff populating KPI gaps.', type:'milestone', createdAt:1745798400000 },
-      { id:9, date:'21 Apr', title:'EDD — Phase 1/2 dates agreed, Au10tix migration scoped', desc:'Phase 1: 21 Jul, Phase 2: 18 Aug. Migrating from SendSafely to Au10tix for doc upload. Ellen engaging Will Penhallurick\'s KYC team.', type:'process', createdAt:1745280000000 },
-      { id:10, date:'18 Apr', title:'PMO — Confluence project templates and Monday board template shipped', desc:'Full template set: RAID log, DACI, actions and decisions, status updates, meeting notes. Standardised Monday board. Consistent structure from day one.', type:'capability', createdAt:1745020800000 },
-      { id:11, date:'15 Apr', title:'Bonus Cash — Launched on time across all target states', desc:'Five teams coordinated. Compliance blocker caught in week two. Delivered to revised plan with no scope cuts. Zero defects at launch.', type:'shipped', createdAt:1744761600000 },
-      { id:12, date:'14 Apr', title:'Crypto — Integration path confirmed: API via Pay.com', desc:'Working group and Pay.com/ZH calls completed same day. Sandbox and docs arriving. Joint Slack channel being set up with Pay.com and Zero Hash.', type:'milestone', createdAt:1744675200000 },
-      { id:13, date:'10 Apr', title:'PMO Intake Process — Live in #hrd-pmo', desc:'Single intake channel with Slack workflow, auto Jira ticket creation, and 48-hour triage SLA. 100% hit rate since launch.', type:'shipped', createdAt:1744329600000 },
-      { id:14, date:'8 Apr', title:'PMR — Player monitoring review process delivered', desc:'Consolidated from five systems to one. 60% reduction in review time. Zero regulatory findings post-launch.', type:'shipped', createdAt:1744156800000 },
-      { id:15, date:'24 Mar', title:'Crypto — Project kicked off with working group', desc:'First working group session. Zero Hash selected over BurraPay. Phase 1 scope confirmed: deposits only, no custody. Confluence space and Slack channel established.', type:'milestone', createdAt:1742774400000 },
-      { id:16, date:'1 Mar', title:'Central Projects — PMO stood up at Hard Rock Digital', desc:'Team formed. Operating model defined. First projects onboarded. AI-assisted from day one.', type:'shipped', createdAt:1740787200000 }
+      { id:1, date:'12 May 2026', title:'Crypto — IL regulatory approval confirmed by IGB', desc:'Illinois Gaming Board signed off on crypto deposits via licensed money transmitter (Zero Hash). IL confirmed as first launch state — the key regulatory gating item cleared.', type:'milestone', createdAt:1747008000000 },
+      { id:2, date:'12 May 2026', title:'Crypto — 31 Aug go-live agreed with working group', desc:'Go-live target confirmed as feasible. Six key decisions made in a single session. Opportunity to bring forward if dev can start late May.', type:'milestone', createdAt:1747008000000 },
+      { id:3, date:'12 May 2026', title:'HRD Hackathon — Taken in via PMO intake', desc:'Cross-functional AI hackathon accepted through PMO intake. Project leadership provided for planning, logistics, and delivery coordination.', type:'milestone', createdAt:1747008000000 },
+      { id:5, date:'4 May 2026', title:'EDD — Phase 1 delivery date locked at 21 Jul', desc:'Dev team locked in for 21 Jul. NATS EDD tab redesign included in Phase 1 scope. Cohort-based rollout agreed.', type:'milestone', createdAt:1746316800000 },
+      { id:11, date:'15 Apr 2026', title:'Bonus Cash — Launched on time across all target states', desc:'Five teams coordinated end to end. Compliance blocker caught and resolved in week two. Delivered to revised plan with no scope cuts and zero defects at launch.', type:'shipped', createdAt:1744761600000 },
+      { id:13, date:'10 Apr 2026', title:'PMO Intake Process — Live in #hrd-pmo', desc:'Single intake channel with Slack workflow, auto Jira ticket creation, and 48-hour triage SLA. 100% SLA hit rate since launch.', type:'shipped', createdAt:1744329600000 },
+      { id:14, date:'8 Apr 2026', title:'PMR — Player monitoring review process delivered', desc:'End-to-end redesign consolidating five systems into one. 60% reduction in review time. Zero regulatory findings post-launch.', type:'shipped', createdAt:1744156800000 },
+      { id:15, date:'24 Mar 2026', title:'Crypto — Project kicked off with working group', desc:'First working group session completed. Zero Hash selected, Phase 1 scope confirmed: deposits only, no custody. Confluence space and Slack channel established.', type:'milestone', createdAt:1742774400000 },
+      { id:16, date:'1 Mar 2026', title:'Central Projects — PMO stood up at Hard Rock Digital', desc:'Team formed. Operating model defined. First projects onboarded. AI-assisted from day one.', type:'shipped', createdAt:1740787200000 }
     ]));
   }
-  localStorage.setItem('pmo_feed_v1', '1');
+  localStorage.setItem('pmo_feed_v2', '1');
   if (!localStorage.getItem('pmo_impact_entries')) {
     localStorage.setItem('pmo_impact_entries', JSON.stringify([
       { id:1, title:'Crypto Deposits (Phase 1 - Zero Hash)', description:'Regulatory approval secured in Illinois. Integration path confirmed via Pay.com/Zero Hash API. Go-live target: 31 Aug 2026.', testimonial:'The PMO doesn\'t feel like a governance layer - they feel like part of the team. They\'ve kept this moving when it could easily have stalled.', testimonialAuthor:'Danny Crook', testimonialRole:'SVP Operations', status:'execution', statusDate:'Since Mar 2026', team:'central', createdAt:1742774400000 },

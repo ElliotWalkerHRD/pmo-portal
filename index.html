@@ -1724,19 +1724,19 @@
         </div>
         <div class="card" style="padding:20px;">
           <div style="font-size:10px;font-weight:700;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-bottom:5px;">Date</div>
-          <input type="text" class="modal-input" id="admin-feed-date" placeholder="e.g. 28 May 2026" style="margin-bottom:12px;">
+          <input type="date" class="modal-input" id="admin-feed-date" style="margin-bottom:4px;">
+          <div style="font-size:10px;color:var(--very-muted);margin-bottom:12px;">Future dates are automatically marked as upcoming.</div>
           <div style="font-size:10px;font-weight:700;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-bottom:5px;">Title</div>
           <input type="text" class="modal-input" id="admin-feed-title" placeholder="Project — What was launched or achieved?" style="margin-bottom:12px;">
           <div style="font-size:10px;font-weight:700;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-bottom:5px;">Description</div>
           <textarea class="modal-input" id="admin-feed-desc" rows="3" placeholder="One or two sentences. What happened, why it matters." style="resize:vertical;margin-bottom:12px;"></textarea>
           <div style="font-size:10px;font-weight:700;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-bottom:5px;">Type</div>
-          <select class="modal-input" id="admin-feed-type" style="margin-bottom:12px;">
+          <select class="modal-input" id="admin-feed-type" style="margin-bottom:18px;">
             <option value="milestone">Milestone</option>
             <option value="shipped">Shipped</option>
             <option value="process">Process</option>
             <option value="capability">New Capability</option>
           </select>
-          <label style="display:flex;align-items:center;gap:8px;font-size:12px;font-weight:600;color:var(--heading);cursor:pointer;margin-bottom:18px;"><input type="checkbox" id="admin-feed-upcoming" style="accent-color:var(--purple);width:15px;height:15px;"> Upcoming announcement</label>
           <button id="admin-feed-submit-btn" onclick="submitAdminFeedEntry()" style="width:100%;padding:9px;border:none;border-radius:var(--radius-sm);background:var(--purple);color:#fff;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;">Add to Feed</button>
         </div>
         <div id="admin-feed-list" style="margin-top:12px;"></div>
@@ -3151,11 +3151,10 @@ function editFeedEntry(id) {
   var e = entries.filter(function(x) { return x.id === id; })[0];
   if (!e) return;
   editingFeedId = id;
-  document.getElementById('admin-feed-date').value = e.date || '';
+  document.getElementById('admin-feed-date').value = e.dateIso || displayToIsoDate(e.date || '');
   document.getElementById('admin-feed-title').value = e.title || '';
   document.getElementById('admin-feed-desc').value = e.desc || '';
   document.getElementById('admin-feed-type').value = e.type || 'milestone';
-  var _ecb = document.getElementById('admin-feed-upcoming'); if (_ecb) _ecb.checked = !!e.upcoming;
   var btn = document.getElementById('admin-feed-submit-btn');
   if (btn) btn.textContent = 'Update Entry';
   document.getElementById('admin-feed-date').scrollIntoView({behavior:'smooth',block:'center'});
@@ -3174,7 +3173,6 @@ function cancelFeedEdit() {
   document.getElementById('admin-feed-title').value = '';
   document.getElementById('admin-feed-desc').value = '';
   document.getElementById('admin-feed-type').value = 'milestone';
-  var _fcb = document.getElementById('admin-feed-upcoming'); if (_fcb) _fcb.checked = false;
   var btn = document.getElementById('admin-feed-submit-btn');
   if (btn) btn.textContent = 'Add to Feed';
 }
@@ -3245,21 +3243,42 @@ function renderAdminFeedList() {
   renderContentNavCounts();
 }
 
+function isoToDisplayDate(iso) {
+  var M = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  var p = iso.split('-'); if (p.length !== 3) return iso;
+  return parseInt(p[2],10) + ' ' + (M[parseInt(p[1],10)-1]||'') + ' ' + p[0];
+}
+function displayToIsoDate(str) {
+  var M = ['jan','feb','mar','apr','may','jun','jul','aug','sep','oct','nov','dec'];
+  var lc = (str||'').toLowerCase(); var mi = -1;
+  for (var i=0;i<M.length;i++) { if (lc.indexOf(M[i])!==-1) { mi=i; break; } }
+  if (mi===-1) return '';
+  var y = (str.match(/\d{4}/)||[String(new Date().getFullYear())])[0];
+  var d = (str.match(/\d{1,2}/)||['1'])[0].padStart(2,'0');
+  return y+'-'+(mi+1<10?'0':'')+(mi+1)+'-'+d;
+}
+function isUpcomingDate(iso) {
+  var today = new Date(); today.setHours(0,0,0,0);
+  var d = new Date(iso + 'T00:00:00'); return d > today;
+}
+
 function submitAdminFeedEntry() {
-  var date = document.getElementById('admin-feed-date').value.trim();
+  var dateIso = document.getElementById('admin-feed-date').value;
   var title = document.getElementById('admin-feed-title').value.trim();
   var desc = document.getElementById('admin-feed-desc').value.trim();
   var type = document.getElementById('admin-feed-type').value;
-  var upcoming = !!(document.getElementById('admin-feed-upcoming') && document.getElementById('admin-feed-upcoming').checked);
-  if (!date || !title) { alert('Date and title are required.'); return; }
+  if (!dateIso || !title) { alert('Date and title are required.'); return; }
+  var date = isoToDisplayDate(dateIso);
+  var upcoming = isUpcomingDate(dateIso);
+  var createdAt = new Date(dateIso + 'T12:00:00').getTime();
   var entries = loadFeedEntries();
   if (editingFeedId !== null) {
-    entries = entries.map(function(e) { return e.id === editingFeedId ? Object.assign({}, e, {date:date,title:title,desc:desc,type:type,upcoming:upcoming}) : e; });
+    entries = entries.map(function(e) { return e.id === editingFeedId ? Object.assign({}, e, {date:date,dateIso:dateIso,title:title,desc:desc,type:type,upcoming:upcoming,createdAt:createdAt}) : e; });
     editingFeedId = null;
     var btn = document.getElementById('admin-feed-submit-btn');
     if (btn) btn.textContent = 'Add to Feed';
   } else {
-    entries.unshift({ date: date, title: title, desc: desc, type: type, upcoming: upcoming, id: Date.now(), createdAt: Date.now() });
+    entries.unshift({ date:date, dateIso:dateIso, title:title, desc:desc, type:type, upcoming:upcoming, createdAt:createdAt, id:Date.now() });
   }
   localStorage.setItem('pmo_feed_entries', JSON.stringify(entries));
   document.getElementById('admin-feed-date').value = '';

@@ -1978,6 +1978,7 @@ function switchAdminPanel(panelId, btn) {
   document.getElementById('admin-panel-' + panelId).classList.add('active');
   btn.classList.add('active');
   if (panelId === 'people') { renderAdminTeamsList(); renderAdminPeopleList(); }
+  if (panelId === 'content') { renderAdminFeedList(); renderAdminFaqList(); renderAdminImpactList(); }
 }
 
 // Team space expand/collapse
@@ -3250,8 +3251,8 @@ document.addEventListener('DOMContentLoaded', function() {
     }));
   }
 
-  // Seed FAQ entries if none exist
-  if (!localStorage.getItem('pmo_feed_entries')) {
+  // Seed feed entries if none exist (version key prevents overwriting user data)
+  if (!localStorage.getItem('pmo_feed_v1') && !JSON.parse(localStorage.getItem('pmo_feed_entries')||'[]').length) {
     localStorage.setItem('pmo_feed_entries', JSON.stringify([
       { id:1, date:'12 May', title:'Crypto — IL regulatory approval confirmed by IGB', desc:'Illinois Gaming Board signed off on crypto deposits via licensed money transmitter (Zero Hash). IL confirmed as first launch state. This was the key regulatory gating item.', type:'milestone', createdAt:1747008000000 },
       { id:2, date:'12 May', title:'Crypto — 31 Aug go-live agreed with working group', desc:'Feasible and fair target confirmed. Opportunity to bring forward if Haley can start dev late May. 6 key decisions made in a single session.', type:'milestone', createdAt:1747008000000 },
@@ -3271,6 +3272,7 @@ document.addEventListener('DOMContentLoaded', function() {
       { id:16, date:'1 Mar', title:'Central Projects — PMO stood up at Hard Rock Digital', desc:'Team formed. Operating model defined. First projects onboarded. AI-assisted from day one.', type:'shipped', createdAt:1740787200000 }
     ]));
   }
+  localStorage.setItem('pmo_feed_v1', '1');
   if (!localStorage.getItem('pmo_impact_entries')) {
     localStorage.setItem('pmo_impact_entries', JSON.stringify([
       { id:1, title:'Crypto Deposits (Phase 1 - Zero Hash)', description:'Regulatory approval secured in Illinois. Integration path confirmed via Pay.com/Zero Hash API. Go-live target: 31 Aug 2026.', testimonial:'The PMO doesn\'t feel like a governance layer - they feel like part of the team. They\'ve kept this moving when it could easily have stalled.', testimonialAuthor:'Danny Crook', testimonialRole:'SVP Operations', status:'execution', statusDate:'Since Mar 2026', team:'central', createdAt:1742774400000 },

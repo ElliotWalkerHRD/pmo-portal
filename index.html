@@ -765,177 +765,9 @@
       <h2 class="section-title">Six teams, one PMO</h2>
       <p class="section-subtitle">Click a team to learn more about what they do and how to engage with them.</p>
 
-      <div class="grid-3" style="gap:10px;margin-bottom:0;" id="team-grid-top">
-        <div class="card card-hover team-tile" style="padding:18px;cursor:pointer;" onclick="toggleTeamDetail('strategy')">
-          <div style="display:flex;justify-content:center;margin-bottom:8px;"><div class="icon-circle icon-circle-lg" style="background:#F0FDF4;border-color:#A3E0B0;"><svg style="stroke:#059669;"><use href="#i-shield"/></svg></div></div>
-          <div class="item-title" style="font-size:14px;text-align:center;">Strategy &amp; Assurance</div>
-          <div class="item-desc" style="text-align:center;margin-top:4px;font-size:11px;">Strategic initiatives and delivery assurance.</div>
-          <div style="text-align:center;margin-top:6px;"><div class="pill" style="background:#F0FDF4;color:#059669;border:1px solid #A3E0B0;"><span class="pill-dot"></span>Julie, James</div></div>
-        </div>
-        <div class="card card-hover team-tile" style="padding:18px;cursor:pointer;" onclick="toggleTeamDetail('cp')">
-          <div style="display:flex;justify-content:center;margin-bottom:8px;"><div class="icon-circle icon-circle-lg"><svg><use href="#i-layers"/></svg></div></div>
-          <div class="item-title" style="font-size:14px;text-align:center;">Central Projects</div>
-          <div class="item-desc" style="text-align:center;margin-top:4px;font-size:11px;">Cross-functional delivery and exec-sponsored programmes.</div>
-          <div style="text-align:center;margin-top:6px;"><div class="pill pill-purple"><span class="pill-dot"></span>Nick, Elliot, Shannon</div></div>
-        </div>
-        <div class="card card-hover team-tile" style="padding:18px;cursor:pointer;" onclick="toggleTeamDetail('intl')">
-          <div style="display:flex;justify-content:center;margin-bottom:8px;"><div class="icon-circle icon-circle-lg icon-circle-blue"><svg><use href="#i-globe"/></svg></div></div>
-          <div class="item-title" style="font-size:14px;text-align:center;">International</div>
-          <div class="item-desc" style="text-align:center;margin-top:4px;font-size:11px;">Market expansion, licensing, and localisation.</div>
-          <div style="text-align:center;margin-top:6px;"><div class="pill pill-blue"><span class="pill-dot"></span>Julie, Larissa</div></div>
-        </div>
-      </div>
-      <div class="grid-4" style="gap:10px;margin-top:10px;" id="team-grid-bottom">
-        <div class="card card-hover team-tile" style="padding:18px;cursor:pointer;" onclick="toggleTeamDetail('tech')">
-          <div style="display:flex;justify-content:center;margin-bottom:8px;"><div class="icon-circle icon-circle-lg icon-circle-orange"><svg><use href="#i-code"/></svg></div></div>
-          <div class="item-title" style="font-size:14px;text-align:center;">Tech</div>
-          <div class="item-desc" style="text-align:center;margin-top:4px;font-size:11px;">Engineering, infrastructure, and tech delivery.</div>
-          <div style="text-align:center;margin-top:6px;"><div class="pill pill-orange"><span class="pill-dot"></span>Brad, Sonia, Piotr</div></div>
-        </div>
-        <div class="card card-hover team-tile" style="padding:18px;cursor:pointer;" onclick="toggleTeamDetail('casino')">
-          <div style="display:flex;justify-content:center;margin-bottom:8px;"><div class="icon-circle icon-circle-lg" style="background:#EDE9FE;border-color:#C4B5FD;"><svg style="stroke:#7C3AED;"><use href="#i-target"/></svg></div></div>
-          <div class="item-title" style="font-size:14px;text-align:center;">Casino</div>
-          <div class="item-desc" style="text-align:center;margin-top:4px;font-size:11px;">Casino delivery and operations.</div>
-          <div style="text-align:center;margin-top:6px;"><div class="pill" style="background:#EDE9FE;color:#7C3AED;"><span class="pill-dot"></span>Adriane</div></div>
-        </div>
-        <div class="card card-hover team-tile" style="padding:18px;cursor:pointer;" onclick="toggleTeamDetail('data')">
-          <div style="display:flex;justify-content:center;margin-bottom:8px;"><div class="icon-circle icon-circle-lg" style="background:#E0F2FE;border-color:#7DD3FC;"><svg style="stroke:#0891B2;"><use href="#i-chart"/></svg></div></div>
-          <div class="item-title" style="font-size:14px;text-align:center;">Data</div>
-          <div class="item-desc" style="text-align:center;margin-top:4px;font-size:11px;">Data projects and analytics.</div>
-          <div style="text-align:center;margin-top:6px;"><div class="pill" style="background:#E0F2FE;color:#0891B2;"><span class="pill-dot"></span>Luke</div></div>
-        </div>
-        <div class="card card-hover team-tile" style="padding:18px;cursor:pointer;" onclick="toggleTeamDetail('mktg')">
-          <div style="display:flex;justify-content:center;margin-bottom:8px;"><div class="icon-circle icon-circle-lg" style="background:#FEF3F2;border-color:#FECDCA;"><svg style="stroke:#F04438;"><use href="#i-send"/></svg></div></div>
-          <div class="item-title" style="font-size:14px;text-align:center;">Marketing</div>
-          <div class="item-desc" style="text-align:center;margin-top:4px;font-size:11px;">Revenue and marketing delivery.</div>
-          <div style="text-align:center;margin-top:6px;"><div class="pill" style="background:#FEF3F2;color:#F04438;"><span class="pill-dot"></span>Justine</div></div>
-        </div>
-      </div>
-
-      <div id="detail-casino" class="team-detail" style="display:none;margin:10px 0;">
-        <div class="card" style="padding:24px;border-left:4px solid #7C3AED;">
-          <div style="font-weight:800;font-size:16px;color:var(--heading);margin-bottom:14px;">Casino</div>
-          <div style="display:flex;gap:20px;margin-bottom:14px;flex-wrap:wrap;">
-            <div style="display:flex;align-items:center;gap:10px;">
-              <img src="https://avatars.slack-edge.com/2026-03-02/10613326884530_c7e6cc9e1ab6f12bc9b6_72.jpg" style="width:72px;height:72px;border-radius:16px;object-fit:cover;border:2px solid rgba(139,92,246,0.15);">
-              <div><div style="font-weight:700;font-size:12px;color:var(--heading);">Adriane Rosen</div><div style="font-size:10px;color:var(--muted);">Director</div></div>
-            </div>
-          </div>
-          <div id="ttile-casino-dynamic" style="margin-top:8px;"></div>
-          <div style="display:flex;justify-content:flex-end;margin-top:10px;">
-            <button class="btn-edit-team" onclick="editTeamTile('casino')">&#9998; Edit</button>
-          </div>
-          <div id="ttile-casino-editform" style="display:none;margin-top:12px;border-top:1px solid var(--divider);padding-top:14px;">
-            <div class="tspace-section-label">What we do</div>
-            <textarea id="ttile-casino-wedo" class="modal-input" style="min-height:60px;resize:vertical;margin-bottom:12px;" placeholder="One item per line..."></textarea>
-            <div class="tspace-section-label">What we don&#39;t do</div>
-            <textarea id="ttile-casino-wdont" class="modal-input" style="min-height:60px;resize:vertical;margin-bottom:12px;" placeholder="One item per line..."></textarea>
-            <div class="tspace-section-label">How to engage us</div>
-            <textarea id="ttile-casino-engage" class="modal-input" style="min-height:40px;resize:vertical;margin-bottom:12px;" placeholder="How should people reach out?"></textarea>
-            <div class="tspace-section-label">Useful links</div>
-            <div id="ttile-casino-links-edit" style="margin-bottom:6px;"></div>
-            <button onclick="addTeamTileLink('casino')" style="font-size:10px;font-weight:700;color:var(--purple);background:none;border:none;cursor:pointer;padding:2px 0;font-family:inherit;margin-bottom:12px;">+ Add link</button>
-            <div class="tspace-section-label">Notes</div>
-            <textarea id="ttile-casino-notes-edit" class="modal-input" style="min-height:40px;resize:vertical;margin-bottom:12px;" placeholder="Additional context..."></textarea>
-            <div style="display:flex;gap:8px;">
-              <button onclick="cancelTeamTileEdit('casino')" style="flex:1;padding:7px;border:1px solid var(--divider);border-radius:var(--radius-sm);background:var(--card-bg);color:var(--muted);font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;">Cancel</button>
-              <button onclick="saveTeamTile('casino')" style="flex:1;padding:7px;border:none;border-radius:var(--radius-sm);background:var(--purple);color:#fff;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;">Save</button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div id="detail-data" class="team-detail" style="display:none;margin:10px 0;">
-        <div class="card" style="padding:24px;border-left:4px solid #0891B2;">
-          <div style="font-weight:800;font-size:16px;color:var(--heading);margin-bottom:14px;">Data</div>
-          <div style="display:flex;gap:20px;margin-bottom:14px;flex-wrap:wrap;">
-            <div style="display:flex;align-items:center;gap:10px;">
-              <img src="https://avatars.slack-edge.com/2026-02-09/10469653376499_db307af83465f456603b_72.png" style="width:72px;height:72px;border-radius:16px;object-fit:cover;border:2px solid rgba(139,92,246,0.15);">
-              <div><div style="font-weight:700;font-size:12px;color:var(--heading);">Luke Borg D'Anastasi</div><div style="font-size:10px;color:var(--muted);">Director</div></div>
-            </div>
-          </div>
-          <div id="ttile-data-dynamic" style="margin-top:8px;"></div>
-          <div style="display:flex;justify-content:flex-end;margin-top:10px;">
-            <button class="btn-edit-team" onclick="editTeamTile('data')">&#9998; Edit</button>
-          </div>
-          <div id="ttile-data-editform" style="display:none;margin-top:12px;border-top:1px solid var(--divider);padding-top:14px;">
-            <div class="tspace-section-label">What we do</div>
-            <textarea id="ttile-data-wedo" class="modal-input" style="min-height:60px;resize:vertical;margin-bottom:12px;" placeholder="One item per line..."></textarea>
-            <div class="tspace-section-label">What we don&#39;t do</div>
-            <textarea id="ttile-data-wdont" class="modal-input" style="min-height:60px;resize:vertical;margin-bottom:12px;" placeholder="One item per line..."></textarea>
-            <div class="tspace-section-label">How to engage us</div>
-            <textarea id="ttile-data-engage" class="modal-input" style="min-height:40px;resize:vertical;margin-bottom:12px;" placeholder="How should people reach out?"></textarea>
-            <div class="tspace-section-label">Useful links</div>
-            <div id="ttile-data-links-edit" style="margin-bottom:6px;"></div>
-            <button onclick="addTeamTileLink('data')" style="font-size:10px;font-weight:700;color:var(--purple);background:none;border:none;cursor:pointer;padding:2px 0;font-family:inherit;margin-bottom:12px;">+ Add link</button>
-            <div class="tspace-section-label">Notes</div>
-            <textarea id="ttile-data-notes-edit" class="modal-input" style="min-height:40px;resize:vertical;margin-bottom:12px;" placeholder="Additional context..."></textarea>
-            <div style="display:flex;gap:8px;">
-              <button onclick="cancelTeamTileEdit('data')" style="flex:1;padding:7px;border:1px solid var(--divider);border-radius:var(--radius-sm);background:var(--card-bg);color:var(--muted);font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;">Cancel</button>
-              <button onclick="saveTeamTile('data')" style="flex:1;padding:7px;border:none;border-radius:var(--radius-sm);background:var(--purple);color:#fff;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;">Save</button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div id="detail-mktg" class="team-detail" style="display:none;margin:10px 0;">
-        <div class="card" style="padding:24px;border-left:4px solid #F04438;">
-          <div style="font-weight:800;font-size:16px;color:var(--heading);margin-bottom:14px;">Marketing</div>
-          <div style="display:flex;gap:20px;margin-bottom:14px;flex-wrap:wrap;">
-            <div style="display:flex;align-items:center;gap:10px;">
-              <img src="https://avatars.slack-edge.com/2026-04-20/10952597835650_d8ba220200503c0fbf1a_72.jpg" style="width:72px;height:72px;border-radius:16px;object-fit:cover;border:2px solid rgba(139,92,246,0.15);">
-              <div><div style="font-weight:700;font-size:12px;color:var(--heading);">Justine King</div><div style="font-size:10px;color:var(--muted);">Director</div></div>
-            </div>
-          </div>
-          <div id="ttile-marketing-dynamic" style="margin-top:8px;"></div>
-          <div style="display:flex;justify-content:flex-end;margin-top:10px;">
-            <button class="btn-edit-team" onclick="editTeamTile('marketing')">&#9998; Edit</button>
-          </div>
-          <div id="ttile-marketing-editform" style="display:none;margin-top:12px;border-top:1px solid var(--divider);padding-top:14px;">
-            <div class="tspace-section-label">What we do</div>
-            <textarea id="ttile-marketing-wedo" class="modal-input" style="min-height:60px;resize:vertical;margin-bottom:12px;" placeholder="One item per line..."></textarea>
-            <div class="tspace-section-label">What we don&#39;t do</div>
-            <textarea id="ttile-marketing-wdont" class="modal-input" style="min-height:60px;resize:vertical;margin-bottom:12px;" placeholder="One item per line..."></textarea>
-            <div class="tspace-section-label">How to engage us</div>
-            <textarea id="ttile-marketing-engage" class="modal-input" style="min-height:40px;resize:vertical;margin-bottom:12px;" placeholder="How should people reach out?"></textarea>
-            <div class="tspace-section-label">Useful links</div>
-            <div id="ttile-marketing-links-edit" style="margin-bottom:6px;"></div>
-            <button onclick="addTeamTileLink('marketing')" style="font-size:10px;font-weight:700;color:var(--purple);background:none;border:none;cursor:pointer;padding:2px 0;font-family:inherit;margin-bottom:12px;">+ Add link</button>
-            <div class="tspace-section-label">Notes</div>
-            <textarea id="ttile-marketing-notes-edit" class="modal-input" style="min-height:40px;resize:vertical;margin-bottom:12px;" placeholder="Additional context..."></textarea>
-            <div style="display:flex;gap:8px;">
-              <button onclick="cancelTeamTileEdit('marketing')" style="flex:1;padding:7px;border:1px solid var(--divider);border-radius:var(--radius-sm);background:var(--card-bg);color:var(--muted);font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;">Cancel</button>
-              <button onclick="saveTeamTile('marketing')" style="flex:1;padding:7px;border:none;border-radius:var(--radius-sm);background:var(--purple);color:#fff;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;">Save</button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div id="detail-strategy" class="team-detail" style="display:none;margin:10px 0;">
-        <div class="card" style="padding:24px;border-left:4px solid #059669;">
-          <div style="font-weight:800;font-size:16px;color:var(--heading);margin-bottom:14px;">Strategy &amp; Assurance</div>
-          <div style="display:flex;gap:20px;margin-bottom:14px;flex-wrap:wrap;">
-            <div style="display:flex;align-items:center;gap:10px;"><img src="https://avatars.slack-edge.com/2023-06-14/5422396896630_18310f9bbfdb1ccd2f9e_72.png" style="width:72px;height:72px;border-radius:16px;object-fit:cover;border:2px solid rgba(139,92,246,0.15);"><div><div style="font-weight:700;font-size:12px;color:var(--heading);">Julie Cokotis</div><div style="font-size:10px;color:var(--muted);">Senior Director</div></div></div>
-            <div style="display:flex;align-items:center;gap:10px;"><img src="https://avatars.slack-edge.com/2026-03-09/10675139248017_272f38a10c087372d3ff_72.png" style="width:72px;height:72px;border-radius:16px;object-fit:cover;border:2px solid rgba(139,92,246,0.15);"><div><div style="font-weight:700;font-size:12px;color:var(--heading);">James Hirst</div><div style="font-size:10px;color:var(--muted);">Senior Director</div></div></div>
-          </div>
-          <div id="ttile-assurance-dynamic" style="margin-top:8px;"></div>
-          <div style="display:flex;justify-content:flex-end;margin-top:10px;"><button class="btn-edit-team" onclick="editTeamTile('assurance')">&#9998; Edit</button></div>
-          <div id="ttile-assurance-editform" style="display:none;margin-top:12px;border-top:1px solid var(--divider);padding-top:14px;">
-            <div class="tspace-section-label">What we do</div>
-            <textarea id="ttile-assurance-wedo" class="modal-input" style="min-height:60px;resize:vertical;margin-bottom:12px;" placeholder="One item per line..."></textarea>
-            <div class="tspace-section-label">What we don&#39;t do</div>
-            <textarea id="ttile-assurance-wdont" class="modal-input" style="min-height:60px;resize:vertical;margin-bottom:12px;" placeholder="One item per line..."></textarea>
-            <div class="tspace-section-label">How to engage us</div>
-            <textarea id="ttile-assurance-engage" class="modal-input" style="min-height:40px;resize:vertical;margin-bottom:12px;" placeholder="How should people reach out?"></textarea>
-            <div class="tspace-section-label">Useful links</div>
-            <div id="ttile-assurance-links-edit" style="margin-bottom:6px;"></div>
-            <button onclick="addTeamTileLink('assurance')" style="font-size:10px;font-weight:700;color:var(--purple);background:none;border:none;cursor:pointer;padding:2px 0;font-family:inherit;margin-bottom:12px;">+ Add link</button>
-            <div class="tspace-section-label">Notes</div>
-            <textarea id="ttile-assurance-notes-edit" class="modal-input" style="min-height:40px;resize:vertical;margin-bottom:12px;" placeholder="Additional context..."></textarea>
-            <div style="display:flex;gap:8px;"><button onclick="cancelTeamTileEdit('assurance')" style="flex:1;padding:7px;border:1px solid var(--divider);border-radius:var(--radius-sm);background:var(--card-bg);color:var(--muted);font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;">Cancel</button><button onclick="saveTeamTile('assurance')" style="flex:1;padding:7px;border:none;border-radius:var(--radius-sm);background:var(--purple);color:#fff;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;">Save</button></div>
-          </div>
-        </div>
-      </div>
+      <div class="grid-3" id="team-grid-top" style="gap:10px;margin-bottom:0;"></div>
+      <div class="grid-4" id="team-grid-bottom" style="gap:10px;margin-top:10px;"></div>
+      <div id="team-details-container"></div>
     </div>
 
     <div class="section-divider"></div>
@@ -1001,129 +833,79 @@
       </a>
       <p style="font-size:12px;color:var(--very-muted);margin-top:10px;">Opens in Slack</p>
     </div>
+
+    <div id="admin-panel-people" class="admin-subpanel">
+      <!-- TEAMS -->
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+        <div>
+          <div style="font-size:15px;font-weight:800;color:var(--heading);">Teams</div>
+          <div style="font-size:11px;color:var(--muted);margin-top:2px;">Manage the teams shown on the homepage and throughout the portal.</div>
+        </div>
+        <button class="btn-primary" onclick="showAddTeamForm()">+ Add Team</button>
+      </div>
+      <div id="admin-teams-list" style="margin-bottom:16px;"></div>
+      <div id="admin-team-form" style="display:none;background:var(--surface);border:1px solid var(--divider);border-radius:var(--radius);padding:20px;margin-bottom:24px;">
+        <div style="font-size:13px;font-weight:800;color:var(--heading);margin-bottom:16px;" id="admin-team-form-title">Add Team</div>
+        <input type="hidden" id="team-form-id">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;">
+          <div><div class="tspace-section-label">Label</div><input type="text" id="team-form-label" class="modal-input" placeholder="e.g. Central Projects"></div>
+          <div><div class="tspace-section-label">Row</div><select id="team-form-row" class="modal-input"><option value="top">Top row</option><option value="bottom">Bottom row</option></select></div>
+        </div>
+        <div class="tspace-section-label">Description</div>
+        <input type="text" id="team-form-desc" class="modal-input" placeholder="Short description shown on tile" style="margin-bottom:12px;">
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:12px;">
+          <div><div class="tspace-section-label">Accent Color</div><div style="display:flex;gap:6px;align-items:center;"><input type="color" id="team-form-color" value="#6941C6" oninput="document.getElementById('team-form-color-hex').value=this.value" style="width:36px;height:32px;border:none;cursor:pointer;border-radius:4px;padding:1px;"><input type="text" id="team-form-color-hex" class="modal-input" placeholder="#6941C6" oninput="try{document.getElementById('team-form-color').value=this.value}catch(e){}" style="flex:1;min-width:0;"></div></div>
+          <div><div class="tspace-section-label">Background</div><div style="display:flex;gap:6px;align-items:center;"><input type="color" id="team-form-colorbg" value="#F4F3FF" oninput="document.getElementById('team-form-colorbg-hex').value=this.value" style="width:36px;height:32px;border:none;cursor:pointer;border-radius:4px;padding:1px;"><input type="text" id="team-form-colorbg-hex" class="modal-input" placeholder="#F4F3FF" oninput="try{document.getElementById('team-form-colorbg').value=this.value}catch(e){}" style="flex:1;min-width:0;"></div></div>
+          <div><div class="tspace-section-label">Border</div><div style="display:flex;gap:6px;align-items:center;"><input type="color" id="team-form-colorborder" value="#E9D7FE" oninput="document.getElementById('team-form-colorborder-hex').value=this.value" style="width:36px;height:32px;border:none;cursor:pointer;border-radius:4px;padding:1px;"><input type="text" id="team-form-colorborder-hex" class="modal-input" placeholder="#E9D7FE" oninput="try{document.getElementById('team-form-colorborder').value=this.value}catch(e){}" style="flex:1;min-width:0;"></div></div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px;">
+          <div><div class="tspace-section-label">Icon</div><select id="team-form-icon" class="modal-input"><option value="i-layers">Layers</option><option value="i-globe">Globe</option><option value="i-code">Code</option><option value="i-target">Target</option><option value="i-chart">Chart</option><option value="i-send">Send</option><option value="i-shield">Shield</option><option value="i-users">Users</option><option value="i-zap">Zap</option><option value="i-rocket">Rocket</option><option value="i-lightbulb">Lightbulb</option><option value="i-book">Book</option><option value="i-cpu">CPU</option><option value="i-bar-chart">Bar Chart</option></select></div>
+          <div><div class="tspace-section-label">Display Order</div><input type="number" id="team-form-order" class="modal-input" min="1" max="10" value="1"></div>
+        </div>
+        <div style="display:flex;gap:8px;">
+          <button onclick="cancelTeamForm()" style="flex:1;padding:9px;border:1px solid var(--divider);border-radius:var(--radius-sm);background:var(--card-bg);color:var(--muted);font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;">Cancel</button>
+          <button onclick="saveTeamForm()" style="flex:1;padding:9px;border:none;border-radius:var(--radius-sm);background:var(--purple);color:#fff;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;">Save Team</button>
+        </div>
+      </div>
+
+      <div style="border-top:1px solid var(--divider);margin-bottom:24px;"></div>
+
+      <!-- PEOPLE -->
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+        <div>
+          <div style="font-size:15px;font-weight:800;color:var(--heading);">People</div>
+          <div style="font-size:11px;color:var(--muted);margin-top:2px;">Manage team members shown in the Team tab.</div>
+        </div>
+        <button class="btn-primary" onclick="showAddPersonForm()">+ Add Person</button>
+      </div>
+      <div id="admin-people-list" style="margin-bottom:16px;"></div>
+      <div id="admin-person-form" style="display:none;background:var(--surface);border:1px solid var(--divider);border-radius:var(--radius);padding:20px;">
+        <div style="font-size:13px;font-weight:800;color:var(--heading);margin-bottom:16px;" id="admin-person-form-title">Add Person</div>
+        <input type="hidden" id="person-form-id">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;">
+          <div><div class="tspace-section-label">Name</div><input type="text" id="person-form-name" class="modal-input" placeholder="Full name"></div>
+          <div><div class="tspace-section-label">Team</div><select id="person-form-team" class="modal-input"></select></div>
+        </div>
+        <div class="tspace-section-label">Role / Title</div>
+        <input type="text" id="person-form-role" class="modal-input" placeholder="e.g. Director, Casino" style="margin-bottom:12px;">
+        <div class="tspace-section-label">Photo URL</div>
+        <input type="text" id="person-form-photo" class="modal-input" placeholder="https://avatars.slack-edge.com/..." style="margin-bottom:16px;">
+        <div style="display:flex;gap:8px;">
+          <button onclick="cancelPersonForm()" style="flex:1;padding:9px;border:1px solid var(--divider);border-radius:var(--radius-sm);background:var(--card-bg);color:var(--muted);font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;">Cancel</button>
+          <button onclick="savePersonForm()" style="flex:1;padding:9px;border:none;border-radius:var(--radius-sm);background:var(--purple);color:#fff;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;">Save Person</button>
+        </div>
+      </div>
+    </div>
   </div>
 
   <!-- ======================== TEAM TAB ======================== -->
   <div id="tab-team" class="tab-content">
     <div class="section">
       <div class="section-label">The PMO Team</div>
-      <h2 class="section-title">13 people across 6 teams</h2>
+      <h2 class="section-title" id="people-count-heading">People across the PMO</h2>
       <p class="section-subtitle">Everyone delivering project leadership across Hard Rock Digital.</p>
 
-      <div class="grid-3" style="gap:16px;">
-
-        <!-- Adriane Rosen -->
-        <div class="card card-hover" style="text-align:center;padding:28px 20px 22px;border-top:3px solid #7C3AED;">
-          <img src="https://avatars.slack-edge.com/2026-03-02/10613326884530_c7e6cc9e1ab6f12bc9b6_72.jpg" class="avatar" style="object-fit:cover;border:3px solid #EDE9FE;">
-          <div class="team-name">Adriane Rosen</div>
-          <div class="team-role">Director, Casino</div>
-          <span style="background:#EDE9FE;color:#7C3AED;border:1px solid #C4B5FD;padding:3px 12px;border-radius:100px;font-size:10px;font-weight:700;">Casino</span>
-        </div>
-
-        <!-- Brad Lackey -->
-        <div class="card card-hover" style="text-align:center;padding:28px 20px 22px;border-top:3px solid #DC6803;">
-          <img src="https://avatars.slack-edge.com/2026-04-08/10898693547424_9075b948d9c5024bf159_72.jpg" class="avatar" style="object-fit:cover;border:3px solid #FFF3E0;">
-          <div class="team-name">Brad Lackey</div>
-          <div class="team-role">Director, Tech</div>
-          <span style="background:#FFF3E0;color:#DC6803;border:1px solid var(--orange-border);padding:3px 12px;border-radius:100px;font-size:10px;font-weight:700;">Tech</span>
-        </div>
-
-        <!-- Elliot Walker -->
-        <div class="card card-hover" style="text-align:center;padding:28px 20px 22px;border-top:3px solid var(--purple);">
-          <img src="https://avatars.slack-edge.com/2026-03-02/10595661687959_73956cec2f90a2e83e7e_72.jpg" class="avatar" style="object-fit:cover;border:3px solid var(--icon-border);">
-          <div class="team-name">Elliot Walker</div>
-          <div class="team-role">Project Manager, Central Projects</div>
-          <span style="background:var(--icon-bg);color:var(--purple);border:1px solid var(--icon-border);padding:3px 12px;border-radius:100px;font-size:10px;font-weight:700;">Central Projects</span>
-        </div>
-
-        <!-- James Hirst -->
-        <div class="card card-hover" style="text-align:center;padding:28px 20px 22px;border-top:3px solid var(--purple-deep);">
-          <img src="https://avatars.slack-edge.com/2026-03-09/10675139248017_272f38a10c087372d3ff_72.png" class="avatar" style="object-fit:cover;border:3px solid var(--icon-border);">
-          <div class="team-name">James Hirst</div>
-          <div class="team-role">Senior Director, PMO Assurance</div>
-          <span style="background:var(--icon-bg);color:var(--purple-deep);border:1px solid var(--icon-border);padding:3px 12px;border-radius:100px;font-size:10px;font-weight:700;">PMO Assurance</span>
-        </div>
-
-        <!-- Julie Cokotis -->
-        <div class="card card-hover" style="text-align:center;padding:28px 20px 22px;border-top:3px solid #2563EB;">
-          <img src="https://avatars.slack-edge.com/2023-06-14/5422396896630_18310f9bbfdb1ccd2f9e_72.png" class="avatar" style="object-fit:cover;border:3px solid #B2DDFF;">
-          <div class="team-name">Julie Cokotis</div>
-          <div class="team-role">Senior Director, Strategic Initiatives</div>
-          <span style="background:#EFF8FF;color:#2563EB;border:1px solid #B2DDFF;padding:3px 12px;border-radius:100px;font-size:10px;font-weight:700;">International</span>
-        </div>
-
-        <!-- Justine King -->
-        <div class="card card-hover" style="text-align:center;padding:28px 20px 22px;border-top:3px solid #F04438;">
-          <img src="https://avatars.slack-edge.com/2026-04-20/10952597835650_d8ba220200503c0fbf1a_72.jpg" class="avatar" style="object-fit:cover;border:3px solid #FECDCA;">
-          <div class="team-name">Justine King</div>
-          <div class="team-role">Director, Revenue &amp; Marketing Delivery</div>
-          <span style="background:#FEF3F2;color:#F04438;border:1px solid #FECDCA;padding:3px 12px;border-radius:100px;font-size:10px;font-weight:700;">Marketing</span>
-        </div>
-
-        <!-- Larissa Lombardo -->
-        <div class="card card-hover" style="text-align:center;padding:28px 20px 22px;border-top:3px solid #2563EB;">
-          <img src="https://avatars.slack-edge.com/2026-02-10/10477641649605_91c502f0e817cb514c46_72.png" class="avatar" style="object-fit:cover;border:3px solid #B2DDFF;">
-          <div class="team-name">Larissa Lombardo</div>
-          <div class="team-role">Project Manager, International</div>
-          <span style="background:#EFF8FF;color:#2563EB;border:1px solid #B2DDFF;padding:3px 12px;border-radius:100px;font-size:10px;font-weight:700;">International</span>
-        </div>
-
-        <!-- Luke Borg D'Anastasi -->
-        <div class="card card-hover" style="text-align:center;padding:28px 20px 22px;border-top:3px solid #0891B2;">
-          <img src="https://avatars.slack-edge.com/2026-02-09/10469653376499_db307af83465f456603b_72.png" class="avatar" style="object-fit:cover;border:3px solid #7DD3FC;">
-          <div class="team-name">Luke Borg D'Anastasi</div>
-          <div class="team-role">Director, Data</div>
-          <span style="background:#E0F2FE;color:#0891B2;border:1px solid #7DD3FC;padding:3px 12px;border-radius:100px;font-size:10px;font-weight:700;">Data</span>
-        </div>
-
-        <!-- Imogen Weaver -->
-        <div class="card card-hover" style="text-align:center;padding:28px 20px 22px;border-top:3px solid #0891B2;">
-          <img src="https://avatars.slack-edge.com/2023-12-04/6289197624099_dc0cc1c7c0953792d29e_72.jpg" class="avatar" style="object-fit:cover;border:3px solid #7DD3FC;">
-          <div class="team-name">Imogen Weaver</div>
-          <div class="team-role">Data</div>
-          <span style="background:#E0F2FE;color:#0891B2;border:1px solid #7DD3FC;padding:3px 12px;border-radius:100px;font-size:10px;font-weight:700;">Data</span>
-        </div>
-
-        <!-- Mary Macbeth -->
-        <div class="card card-hover" style="text-align:center;padding:28px 20px 22px;border-top:3px solid var(--dark-bg);">
-          <img src="https://avatars.slack-edge.com/2025-10-20/9742690562033_761ffeccc0ce570ff667_72.jpg" class="avatar" style="object-fit:cover;border:3px solid var(--divider);">
-          <div class="team-name">Mary Macbeth</div>
-          <div class="team-role">VP, PMO</div>
-          <span style="background:var(--dark-card);color:#fff;border:1px solid #444;padding:3px 12px;border-radius:100px;font-size:10px;font-weight:700;">VP PMO</span>
-        </div>
-
-        <!-- Nick Robinson -->
-        <div class="card card-hover" style="text-align:center;padding:28px 20px 22px;border-top:3px solid var(--purple);">
-          <img src="https://avatars.slack-edge.com/2026-03-24/10777711388129_5320eae749918c6cd1ab_72.jpg" class="avatar" style="object-fit:cover;border:3px solid var(--icon-border);">
-          <div class="team-name">Nick Robinson</div>
-          <div class="team-role">Senior Director, Central Projects</div>
-          <span style="background:var(--icon-bg);color:var(--purple);border:1px solid var(--icon-border);padding:3px 12px;border-radius:100px;font-size:10px;font-weight:700;">Central Projects</span>
-        </div>
-
-        <!-- Piotr Barczycki -->
-        <div class="card card-hover" style="text-align:center;padding:28px 20px 22px;border-top:3px solid #DC6803;">
-          <img src="https://avatars.slack-edge.com/2025-02-03/8390986869523_a997dded665dd13609c6_72.jpg" class="avatar" style="object-fit:cover;border:3px solid #FFF3E0;" onerror="this.style.display='none';this.nextSibling.style.display='flex'"><div class="avatar" style="display:none;background:#DC6803;color:#fff;align-items:center;justify-content:center;font-weight:800;font-size:22px;">PB</div>
-          <div class="team-name">Piotr Barczycki</div>
-          <div class="team-role">Technical Project Manager, Tech</div>
-          <span style="background:#FFF3E0;color:#DC6803;border:1px solid var(--orange-border);padding:3px 12px;border-radius:100px;font-size:10px;font-weight:700;">Tech</span>
-        </div>
-
-        <!-- Shannon Greenwood -->
-        <div class="card card-hover" style="text-align:center;padding:28px 20px 22px;border-top:3px solid var(--purple);">
-          <img src="https://avatars.slack-edge.com/2026-05-05/11057449703302_3d624808c33e4b309738_72.png" class="avatar" style="object-fit:cover;border:3px solid var(--icon-border);">
-          <div class="team-name">Shannon Greenwood</div>
-          <div class="team-role">Project Manager, Central Projects</div>
-          <span style="background:var(--icon-bg);color:var(--purple);border:1px solid var(--icon-border);padding:3px 12px;border-radius:100px;font-size:10px;font-weight:700;">Central Projects</span>
-        </div>
-
-        <!-- Sonia Golawska -->
-        <div class="card card-hover" style="text-align:center;padding:28px 20px 22px;border-top:3px solid #DC6803;">
-          <img src="https://avatars.slack-edge.com/2024-07-29/7490311061445_2e2b9c5d77d3939c0ec6_72.jpg" class="avatar" style="object-fit:cover;border:3px solid #FFF3E0;">
-          <div class="team-name">Sonia Golawska</div>
-          <div class="team-role">Project Manager, Tech</div>
-          <span style="background:#FFF3E0;color:#DC6803;border:1px solid var(--orange-border);padding:3px 12px;border-radius:100px;font-size:10px;font-weight:700;">Tech</span>
-        </div>
-
+      <div class="grid-3" style="gap:16px;" id="people-grid"></div>
       </div>
     </div>
 
@@ -1216,6 +998,7 @@
       <button class="admin-subnav-btn active" onclick="switchAdminPanel('home', this)">Home</button>
       <button class="admin-subnav-btn" onclick="switchAdminPanel('onboarding', this)">Onboarding</button>
       <button class="admin-subnav-btn" onclick="switchAdminPanel('aitoolkit', this)">Toolkit</button>
+      <button class="admin-subnav-btn" onclick="switchAdminPanel('people', this)">People &amp; Teams</button>
       <button class="admin-subnav-btn" onclick="switchAdminPanel('content', this)">Manage Content</button>
     </div>
 
@@ -2011,7 +1794,7 @@
           <select class="modal-input" id="admin-faq-team" style="margin-bottom:18px;">
             <option value="all">All teams</option>
             <option value="central">Central Projects</option>
-            <option value="techpmo">Tech</option>
+            <option value="tech">Tech</option>
             <option value="casino">Casino</option>
             <option value="international">International</option>
             <option value="marketing">Marketing</option>
@@ -2052,7 +1835,7 @@
           <select class="modal-input" id="admin-impact-team" style="margin-bottom:12px;">
             <option value="all">All teams / PMO</option>
             <option value="central">Central Projects</option>
-            <option value="techpmo">Tech</option>
+            <option value="tech">Tech</option>
             <option value="casino">Casino</option>
             <option value="international">International</option>
             <option value="marketing">Marketing</option>
@@ -2168,6 +1951,7 @@ function switchAdminPanel(panelId, btn) {
   document.querySelectorAll('.admin-subnav-btn').forEach(b => b.classList.remove('active'));
   document.getElementById('admin-panel-' + panelId).classList.add('active');
   btn.classList.add('active');
+  if (panelId === 'people') { renderAdminTeamsList(); renderAdminPeopleList(); }
 }
 
 // Team space expand/collapse
@@ -2210,26 +1994,11 @@ setInterval(() => { var n = getTotalSlides(); if (n > 0) goTestimonial((testSlid
 // ======================== INLINE EDITING + PIN AUTH ========================
 
 const PMO_PINS = {
-  central: '1111', techpmo: '2222', casino: '3333', international: '4444',
+  central: '1111', tech: '2222', techpmo: '2222', casino: '3333', international: '4444',
   marketing: '5555', data: '6666', assurance: '7777', feed: '0000', admin: '0000'
 };
 
-const PERSON_DATA = {
-  adriane: { name: 'Adriane Rosen', team: 'casino' },
-  brad:    { name: 'Brad Lackey', team: 'techpmo' },
-  elliot:  { name: 'Elliot Walker', team: 'central' },
-  james:   { name: 'James Hirst', team: 'assurance' },
-  julie:   { name: 'Julie Cokotis', team: 'international' },
-  justine: { name: 'Justine King', team: 'marketing' },
-  larissa: { name: 'Larissa Lombardo', team: 'international' },
-  luke:    { name: "Luke Borg D'Anastasi", team: 'data' },
-  imogen:  { name: 'Imogen Weaver', team: 'data' },
-  mary:    { name: 'Mary Macbeth', team: 'feed' },
-  nick:    { name: 'Nick Robinson', team: 'central' },
-  piotr:   { name: 'Piotr Barczycki', team: 'techpmo' },
-  shannon: { name: 'Shannon Greenwood', team: 'central' },
-  sonia:   { name: 'Sonia Golawska', team: 'techpmo' }
-};
+
 
 let pinContext = null;
 
@@ -2250,7 +2019,7 @@ function openAddEntry() {
 
 function editPerson(slug, teamId) {
   pinContext = { type: 'person', slug, teamId };
-  var firstName = (PERSON_DATA[slug] ? PERSON_DATA[slug].name : slug).split(' ')[0];
+  var _pp = loadPeopleData().find(function(p){return p.id===slug;}); var firstName = (_pp ? _pp.name : slug).split(' ')[0];
   document.getElementById('modal-pin-title').textContent = 'Team PIN Required';
   document.getElementById('modal-pin-subtitle').textContent = 'Enter ' + firstName + "'s team PIN to edit this profile.";
   openPinModal();
@@ -2276,7 +2045,8 @@ function submitPin() {
   if (!pinContext) return;
   var entered = document.getElementById('modal-pin-input').value;
   var key = pinContext.type === 'feed' ? 'feed' : (pinContext.type === 'admin' ? 'admin' : (pinContext.type === 'person' ? pinContext.teamId : pinContext.id));
-  if (entered !== PMO_PINS[key]) {
+  var _validPin = PMO_PINS[key] !== undefined ? PMO_PINS[key] : PMO_PINS['admin'];
+  if (entered !== _validPin) {
     document.getElementById('modal-pin-error').style.display = 'block';
     document.getElementById('modal-pin-input').value = '';
     return;
@@ -2379,7 +2149,7 @@ function escHtml(s) {
 // ---- Person Card Editing ----
 function showPersonEditForm(slug) {
   var d = loadPersonData(slug);
-  document.getElementById('modal-person-name').textContent = PERSON_DATA[slug] ? PERSON_DATA[slug].name : slug;
+  var _ppd = loadPeopleData().find(function(p){return p.id===slug;}); document.getElementById('modal-person-name').textContent = _ppd ? _ppd.name : slug;
   document.getElementById('pedit-bio').value = d.bio || '';
   document.getElementById('pedit-focus').value = d.focus || '';
   var modal = document.getElementById('modal-person-edit');
@@ -2617,28 +2387,289 @@ function renderTeamTile(id) {
 }
 }
 
-// ======================== TEAM LABEL / COLOR HELPERS ========================
+// ======================== TEAM / PEOPLE DATA ========================
 
-var TEAM_LABELS = {
-  all: 'All teams', central: 'Central Projects', techpmo: 'Tech',
-  casino: 'Casino', international: 'International', marketing: 'Marketing',
-  data: 'Data', assurance: 'Strategy & Assurance'
-};
-var TEAM_COLORS = {
-  all:           { bg: '#F4F3FF', color: '#6941C6', border: '#E9D7FE' },
-  central:       { bg: '#F4F3FF', color: '#6941C6', border: '#E9D7FE' },
-  techpmo:       { bg: '#FFF3E0', color: '#DC6803', border: '#FDD9A3' },
-  casino:        { bg: '#EDE9FE', color: '#7C3AED', border: '#C4B5FD' },
-  international: { bg: '#EFF8FF', color: '#2563EB', border: '#B2DDFF' },
-  marketing:     { bg: '#FEF3F2', color: '#F04438', border: '#FECDCA' },
-  data:          { bg: '#E0F2FE', color: '#0891B2', border: '#7DD3FC' },
-  assurance:     { bg: '#F0FDF4', color: '#059669', border: '#A3E0B0' }
-};
+function loadTeamsData() { try { return JSON.parse(localStorage.getItem('pmo_teams') || '[]'); } catch(e) { return []; } }
+function saveTeamsData(t) { _teamsCache = null; localStorage.setItem('pmo_teams', JSON.stringify(t)); }
+function loadPeopleData() { try { return JSON.parse(localStorage.getItem('pmo_people') || '[]'); } catch(e) { return []; } }
+function savePeopleData(p) { localStorage.setItem('pmo_people', JSON.stringify(p)); }
+
+var _teamsCache = null;
+function getTeamsMap() {
+  if (_teamsCache) return _teamsCache;
+  var teams = loadTeamsData();
+  _teamsCache = { all: { id:'all', label:'All teams', color:'#6941C6', colorBg:'#F4F3FF', colorBorder:'#E9D7FE', bg:'#F4F3FF', border:'#E9D7FE' } };
+  teams.forEach(function(t) { _teamsCache[t.id] = Object.assign({}, t, { bg: t.colorBg, border: t.colorBorder }); });
+  return _teamsCache;
+}
 function teamBadgeHtml(team) {
   if (!team || team === 'all') return '';
-  var t = TEAM_COLORS[team] || TEAM_COLORS.central;
-  return '<span style="background:' + t.bg + ';color:' + t.color + ';border:1px solid ' + t.border + ';padding:2px 8px;border-radius:100px;font-size:9px;font-weight:700;vertical-align:middle;margin-left:6px;">' + escHtml(TEAM_LABELS[team] || team) + '</span>';
+  var tm = getTeamsMap(); var t = tm[team] || tm['all'];
+  return '<span style="background:' + t.colorBg + ';color:' + t.color + ';border:1px solid ' + t.colorBorder + ';padding:2px 8px;border-radius:100px;font-size:9px;font-weight:700;vertical-align:middle;margin-left:6px;">' + escHtml(t.label || team) + '</span>';
 }
+
+// ======================== TEAM GRIDS ========================
+
+function buildTeamDetailPanel(team, members) {
+  var id = team.id;
+  var sq = "'";
+  var memberHtml = members.map(function(p) {
+    return '<div style="display:flex;align-items:center;gap:10px;">' +
+      '<img src="' + escHtml(p.photo||'') + '" style="width:72px;height:72px;border-radius:16px;object-fit:cover;border:2px solid rgba(139,92,246,0.15);" onerror="this.style.display=\'none\'">' +
+      '<div><div style="font-weight:700;font-size:12px;color:var(--heading);">' + escHtml(p.name) + '</div>' +
+      '<div style="font-size:10px;color:var(--muted);">' + escHtml(p.role||'') + '</div></div></div>';
+  }).join('');
+  return '<div id="detail-' + id + '" class="team-detail" style="display:none;margin:10px 0;">' +
+    '<div class="card" style="padding:24px;border-left:4px solid ' + team.color + ';">' +
+      '<div style="font-weight:800;font-size:16px;color:var(--heading);margin-bottom:14px;">' + escHtml(team.label) + '</div>' +
+      (memberHtml ? '<div style="display:flex;gap:20px;margin-bottom:14px;flex-wrap:wrap;">' + memberHtml + '</div>' : '') +
+      '<div id="ttile-' + id + '-dynamic" style="margin-top:8px;"></div>' +
+      '<div style="display:flex;justify-content:flex-end;margin-top:10px;">' +
+        '<button class="btn-edit-team" onclick="editTeamTile(' + sq + id + sq + ')">&#9998; Edit</button>' +
+      '</div>' +
+      '<div id="ttile-' + id + '-editform" style="display:none;margin-top:12px;border-top:1px solid var(--divider);padding-top:14px;">' +
+        '<div class="tspace-section-label">What we do</div>' +
+        '<textarea id="ttile-' + id + '-wedo" class="modal-input" style="min-height:60px;resize:vertical;margin-bottom:12px;" placeholder="One item per line..."></textarea>' +
+        '<div class="tspace-section-label">What we don' + sq + 't do</div>' +
+        '<textarea id="ttile-' + id + '-wdont" class="modal-input" style="min-height:60px;resize:vertical;margin-bottom:12px;" placeholder="One item per line..."></textarea>' +
+        '<div class="tspace-section-label">How to engage us</div>' +
+        '<textarea id="ttile-' + id + '-engage" class="modal-input" style="min-height:40px;resize:vertical;margin-bottom:12px;" placeholder="How should people reach out?"></textarea>' +
+        '<div class="tspace-section-label">Useful links</div>' +
+        '<div id="ttile-' + id + '-links-edit" style="margin-bottom:6px;"></div>' +
+        '<button onclick="addTeamTileLink(' + sq + id + sq + ')" style="font-size:10px;font-weight:700;color:var(--purple);background:none;border:none;cursor:pointer;padding:2px 0;font-family:inherit;margin-bottom:12px;">+ Add link</button>' +
+        '<div class="tspace-section-label">Notes</div>' +
+        '<textarea id="ttile-' + id + '-notes-edit" class="modal-input" style="min-height:40px;resize:vertical;margin-bottom:12px;" placeholder="Additional context..."></textarea>' +
+        '<div style="display:flex;gap:8px;">' +
+          '<button onclick="cancelTeamTileEdit(' + sq + id + sq + ')" style="flex:1;padding:7px;border:1px solid var(--divider);border-radius:var(--radius-sm);background:var(--card-bg);color:var(--muted);font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;">Cancel</button>' +
+          '<button onclick="saveTeamTile(' + sq + id + sq + ')" style="flex:1;padding:7px;border:none;border-radius:var(--radius-sm);background:var(--purple);color:#fff;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;">Save</button>' +
+        '</div>' +
+      '</div>' +
+    '</div>' +
+  '</div>';
+}
+
+function renderTeamGrids() {
+  var teams = loadTeamsData();
+  var people = loadPeopleData();
+  var byTeam = {};
+  people.forEach(function(p) { if (p.teamId) { if (!byTeam[p.teamId]) byTeam[p.teamId] = []; byTeam[p.teamId].push(p); } });
+  var topTeams    = teams.filter(function(t){return t.row==='top';}).sort(function(a,b){return (a.order||99)-(b.order||99);});
+  var bottomTeams = teams.filter(function(t){return t.row!=='top';}).sort(function(a,b){return (a.order||99)-(b.order||99);});
+  function tilePill(team) {
+    var m = (byTeam[team.id]||[]).slice().sort(function(a,b){return(a.sortOrder||99)-(b.sortOrder||99);});
+    var names = m.map(function(p){return p.name.split(' ')[0];}).join(', ');
+    if (!names) return '';
+    return '<div style="text-align:center;margin-top:6px;"><div class="pill" style="background:' + team.colorBg + ';color:' + team.color + ';border:1px solid ' + team.colorBorder + ';"><span class="pill-dot"></span>' + escHtml(names) + '</div></div>';
+  }
+  function tileHtml(team) {
+    var ib = (team.color !== '#6941C6') ? 'background:' + team.colorBg + ';border-color:' + team.colorBorder + ';' : '';
+    var ss = (team.color !== '#6941C6') ? 'stroke:' + team.color + ';' : '';
+    return '<div class="card card-hover team-tile" style="padding:18px;cursor:pointer;" onclick="toggleTeamDetail(\'' + team.id + '\')">' +
+      '<div style="display:flex;justify-content:center;margin-bottom:8px;"><div class="icon-circle icon-circle-lg"' + (ib ? ' style="' + ib + '"' : '') + '>' +
+        '<svg' + (ss ? ' style="' + ss + '"' : '') + '><use href="#' + escHtml(team.iconId||'i-layers') + '"/></svg>' +
+      '</div></div>' +
+      '<div class="item-title" style="font-size:14px;text-align:center;">' + escHtml(team.label) + '</div>' +
+      '<div class="item-desc" style="text-align:center;margin-top:4px;font-size:11px;">' + escHtml(team.description||'') + '</div>' +
+      tilePill(team) +
+    '</div>';
+  }
+  var topGrid    = document.getElementById('team-grid-top');
+  var bottomGrid = document.getElementById('team-grid-bottom');
+  var detailCont = document.getElementById('team-details-container');
+  if (topGrid) topGrid.innerHTML = topTeams.map(tileHtml).join('');
+  if (bottomGrid) { bottomGrid.className = 'grid-' + (bottomTeams.length <= 3 ? '3' : '4'); bottomGrid.style.gap = '10px'; bottomGrid.style.marginTop = '10px'; bottomGrid.innerHTML = bottomTeams.map(tileHtml).join(''); }
+  if (detailCont) {
+    var allT = topTeams.concat(bottomTeams);
+    detailCont.innerHTML = allT.map(function(team) {
+      var m = (byTeam[team.id]||[]).slice().sort(function(a,b){return(a.sortOrder||99)-(b.sortOrder||99);});
+      return buildTeamDetailPanel(team, m);
+    }).join('');
+    allT.forEach(function(t) { renderTeamTile(t.id); });
+  }
+  document.querySelectorAll('.team-detail').forEach(function(d){d.style.display='none';});
+  document.querySelectorAll('.team-tile').forEach(function(t){t.classList.remove('tile-open');});
+}
+
+function renderPeopleGrid() {
+  var people = loadPeopleData();
+  var tm = getTeamsMap();
+  people.sort(function(a,b) {
+    var ta = tm[a.teamId], tb = tm[b.teamId];
+    var ao = ta ? ((ta.row==='top'?0:100)+(ta.order||99)) : 200;
+    var bo = tb ? ((tb.row==='top'?0:100)+(tb.order||99)) : 200;
+    return ao !== bo ? ao - bo : (a.sortOrder||99)-(b.sortOrder||99);
+  });
+  var grid = document.getElementById('people-grid');
+  if (!grid) return;
+  grid.innerHTML = people.map(function(p) {
+    var team = tm[p.teamId];
+    var bc = team ? team.color : '#6941C6', bb = team ? team.colorBg : '#F4F3FF', bbd = team ? team.colorBorder : '#E9D7FE';
+    var tl = team ? team.label : (p.teamId||'');
+    var ini = p.name.split(' ').map(function(w){return w[0]||'';}).join('').substring(0,2).toUpperCase();
+    return '<div class="card card-hover" id="pcard-' + escHtml(p.id) + '" style="text-align:center;padding:28px 20px 22px;border-top:3px solid ' + bc + ';">' +
+      '<img src="' + escHtml(p.photo||'') + '" class="avatar" style="object-fit:cover;border:3px solid ' + bb + ';" onerror="this.style.display=\'none\';this.nextSibling.style.display=\'flex\'">' +
+      '<div class="avatar" style="display:none;background:' + bc + ';color:#fff;align-items:center;justify-content:center;font-weight:800;font-size:22px;">' + escHtml(ini) + '</div>' +
+      '<div class="team-name">' + escHtml(p.name) + '</div>' +
+      '<div class="team-role">' + escHtml(p.role||'') + '</div>' +
+      '<span style="background:' + bb + ';color:' + bc + ';border:1px solid ' + bbd + ';padding:3px 12px;border-radius:100px;font-size:10px;font-weight:700;">' + escHtml(tl) + '</span>' +
+      '<div id="pbio-' + escHtml(p.id) + '"></div>' +
+      '<button class="btn-edit-person" onclick="editPerson(' + JSON.stringify(p.id) + ',' + JSON.stringify(p.teamId||'') + ')">&#9998; Edit profile</button>' +
+    '</div>';
+  }).join('');
+  var h = document.getElementById('people-count-heading');
+  if (h) { var tc = new Set(people.map(function(p){return p.teamId;}).filter(Boolean)).size; h.textContent = people.length + ' people across ' + tc + ' teams'; }
+  people.forEach(function(p) { renderPersonCard(p.id); });
+}
+
+// ======================== TEAMS ADMIN ========================
+
+function renderAdminTeamsList() {
+  var teams = loadTeamsData().sort(function(a,b){ return ((a.row==='top'?0:1)-(b.row==='top'?0:1)) || (a.order||99)-(b.order||99); });
+  var el = document.getElementById('admin-teams-list'); if (!el) return;
+  if (!teams.length) { el.innerHTML = '<div style="font-size:12px;color:var(--very-muted);font-style:italic;">No teams yet.</div>'; return; }
+  el.innerHTML = teams.map(function(t) {
+    return '<div style="display:flex;align-items:center;gap:12px;padding:10px 12px;background:var(--surface);border-radius:var(--radius-sm);margin-bottom:8px;">' +
+      '<div style="width:32px;height:32px;border-radius:var(--radius-sm);background:' + t.colorBg + ';border:1px solid ' + t.colorBorder + ';display:flex;align-items:center;justify-content:center;flex-shrink:0;">' +
+        '<svg width="16" height="16" fill="none" stroke="' + t.color + '" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#' + escHtml(t.iconId||'i-layers') + '"/></svg>' +
+      '</div>' +
+      '<div style="flex:1;min-width:0;"><div style="font-size:12px;font-weight:800;color:var(--heading);">' + escHtml(t.label) + '</div>' +
+        '<div style="font-size:10px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">' + escHtml(t.description||'') + ' <span style="color:var(--very-muted);">(' + t.row + ' row, order ' + t.order + ')</span></div>' +
+      '</div>' +
+      '<div style="display:flex;gap:6px;flex-shrink:0;">' +
+        '<button onclick="editTeamAdmin(' + JSON.stringify(t.id) + ')" style="font-size:10px;font-weight:700;padding:4px 10px;border:1px solid var(--divider);border-radius:100px;background:var(--card-bg);color:var(--muted);cursor:pointer;font-family:inherit;">Edit</button>' +
+        '<button onclick="deleteTeamAdmin(' + JSON.stringify(t.id) + ')" style="font-size:10px;font-weight:700;padding:4px 10px;border:1px solid var(--divider);border-radius:100px;background:var(--card-bg);color:#F04438;cursor:pointer;font-family:inherit;">Remove</button>' +
+      '</div></div>';
+  }).join('');
+}
+
+function showAddTeamForm() {
+  document.getElementById('admin-team-form-title').textContent = 'Add Team';
+  document.getElementById('team-form-id').value = '';
+  ['team-form-label','team-form-desc'].forEach(function(id){document.getElementById(id).value='';});
+  var defs = {color:'#6941C6',colorbg:'#F4F3FF',colorborder:'#E9D7FE'};
+  Object.keys(defs).forEach(function(k){ document.getElementById('team-form-'+k).value=defs[k]; document.getElementById('team-form-'+k+'-hex').value=defs[k]; });
+  document.getElementById('team-form-icon').value='i-layers';
+  document.getElementById('team-form-row').value='top';
+  document.getElementById('team-form-order').value='1';
+  document.getElementById('admin-team-form').style.display='block';
+  document.getElementById('admin-team-form').scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
+function editTeamAdmin(id) {
+  var t = loadTeamsData().find(function(x){return x.id===id;}); if (!t) return;
+  document.getElementById('admin-team-form-title').textContent = 'Edit Team';
+  document.getElementById('team-form-id').value = t.id;
+  document.getElementById('team-form-label').value = t.label||'';
+  document.getElementById('team-form-desc').value = t.description||'';
+  document.getElementById('team-form-color').value = t.color||'#6941C6';
+  document.getElementById('team-form-color-hex').value = t.color||'#6941C6';
+  document.getElementById('team-form-colorbg').value = t.colorBg||'#F4F3FF';
+  document.getElementById('team-form-colorbg-hex').value = t.colorBg||'#F4F3FF';
+  document.getElementById('team-form-colorborder').value = t.colorBorder||'#E9D7FE';
+  document.getElementById('team-form-colorborder-hex').value = t.colorBorder||'#E9D7FE';
+  document.getElementById('team-form-icon').value = t.iconId||'i-layers';
+  document.getElementById('team-form-row').value = t.row||'top';
+  document.getElementById('team-form-order').value = t.order||1;
+  document.getElementById('admin-team-form').style.display='block';
+  document.getElementById('admin-team-form').scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
+function cancelTeamForm() { document.getElementById('admin-team-form').style.display='none'; }
+
+function saveTeamForm() {
+  var id    = document.getElementById('team-form-id').value.trim();
+  var label = document.getElementById('team-form-label').value.trim();
+  if (!label) { alert('Label is required.'); return; }
+  var hex   = document.getElementById('team-form-color-hex').value.trim() || document.getElementById('team-form-color').value;
+  var hexBg = document.getElementById('team-form-colorbg-hex').value.trim() || document.getElementById('team-form-colorbg').value;
+  var hexBd = document.getElementById('team-form-colorborder-hex').value.trim() || document.getElementById('team-form-colorborder').value;
+  var teams  = loadTeamsData();
+  var isNew  = !id;
+  if (isNew) id = label.toLowerCase().replace(/[^a-z0-9]/g,'').substring(0,16) + '_' + Date.now().toString(36);
+  var t = { id:id, label:label, description:document.getElementById('team-form-desc').value.trim(), color:hex, colorBg:hexBg, colorBorder:hexBd, iconId:document.getElementById('team-form-icon').value, row:document.getElementById('team-form-row').value, order:parseInt(document.getElementById('team-form-order').value)||1 };
+  if (isNew) { teams.push(t); } else { var ix=teams.findIndex(function(x){return x.id===id;}); if(ix>=0) teams[ix]=t; else teams.push(t); }
+  saveTeamsData(teams); cancelTeamForm(); renderAdminTeamsList(); renderTeamGrids();
+}
+
+function deleteTeamAdmin(id) {
+  if (!confirm('Remove this team? This cannot be undone.')) return;
+  saveTeamsData(loadTeamsData().filter(function(t){return t.id!==id;}));
+  renderAdminTeamsList(); renderTeamGrids();
+}
+
+// ======================== PEOPLE ADMIN ========================
+
+function renderAdminPeopleList() {
+  var people = loadPeopleData(); var tm = getTeamsMap();
+  var el = document.getElementById('admin-people-list'); if (!el) return;
+  if (!people.length) { el.innerHTML = '<div style="font-size:12px;color:var(--very-muted);font-style:italic;">No people yet.</div>'; return; }
+  var sorted = people.slice().sort(function(a,b) {
+    var ta=tm[a.teamId],tb=tm[b.teamId];
+    var ao=ta?((ta.row==='top'?0:100)+(ta.order||99)):200, bo=tb?((tb.row==='top'?0:100)+(tb.order||99)):200;
+    return ao!==bo?ao-bo:(a.sortOrder||99)-(b.sortOrder||99);
+  });
+  el.innerHTML = sorted.map(function(p) {
+    var team=tm[p.teamId], bc=team?team.color:'#888', bb=team?team.colorBg:'#f0f0f0', bbd=team?team.colorBorder:'#ccc', tl=team?team.label:(p.teamId||'No team');
+    return '<div style="display:flex;align-items:center;gap:12px;padding:10px 12px;background:var(--surface);border-radius:var(--radius-sm);margin-bottom:8px;">' +
+      '<img src="' + escHtml(p.photo||'') + '" style="width:36px;height:36px;border-radius:50%;object-fit:cover;flex-shrink:0;border:2px solid ' + bb + ';" onerror="this.style.display=\'none\'">' +
+      '<div style="flex:1;min-width:0;"><div style="font-size:12px;font-weight:800;color:var(--heading);">' + escHtml(p.name) + '</div><div style="font-size:10px;color:var(--muted);">' + escHtml(p.role||'') + '</div></div>' +
+      '<span style="background:' + bb + ';color:' + bc + ';border:1px solid ' + bbd + ';padding:2px 8px;border-radius:100px;font-size:9px;font-weight:700;white-space:nowrap;flex-shrink:0;">' + escHtml(tl) + '</span>' +
+      '<div style="display:flex;gap:6px;flex-shrink:0;">' +
+        '<button onclick="editPersonAdmin(' + JSON.stringify(p.id) + ')" style="font-size:10px;font-weight:700;padding:4px 10px;border:1px solid var(--divider);border-radius:100px;background:var(--card-bg);color:var(--muted);cursor:pointer;font-family:inherit;">Edit</button>' +
+        '<button onclick="deletePersonAdmin(' + JSON.stringify(p.id) + ')" style="font-size:10px;font-weight:700;padding:4px 10px;border:1px solid var(--divider);border-radius:100px;background:var(--card-bg);color:#F04438;cursor:pointer;font-family:inherit;">Remove</button>' +
+      '</div></div>';
+  }).join('');
+}
+
+function populateTeamSelect(selId, selTeamId) {
+  var sel = document.getElementById(selId); if (!sel) return;
+  var teams = loadTeamsData().sort(function(a,b){return ((a.row==='top'?0:1)-(b.row==='top'?0:1))||(a.order||99)-(b.order||99);});
+  sel.innerHTML = '<option value="">â€” no team â€”</option>' + teams.map(function(t){
+    return '<option value="' + escHtml(t.id) + '"' + (t.id===selTeamId?' selected':'') + '>' + escHtml(t.label) + '</option>';
+  }).join('');
+}
+
+function showAddPersonForm() {
+  document.getElementById('admin-person-form-title').textContent = 'Add Person';
+  document.getElementById('person-form-id').value = '';
+  ['person-form-name','person-form-role','person-form-photo'].forEach(function(id){document.getElementById(id).value='';});
+  populateTeamSelect('person-form-team','');
+  document.getElementById('admin-person-form').style.display='block';
+  document.getElementById('admin-person-form').scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
+function editPersonAdmin(id) {
+  var p = loadPeopleData().find(function(x){return x.id===id;}); if (!p) return;
+  document.getElementById('admin-person-form-title').textContent = 'Edit Person';
+  document.getElementById('person-form-id').value = p.id;
+  document.getElementById('person-form-name').value = p.name||'';
+  document.getElementById('person-form-role').value = p.role||'';
+  document.getElementById('person-form-photo').value = p.photo||'';
+  populateTeamSelect('person-form-team', p.teamId||'');
+  document.getElementById('admin-person-form').style.display='block';
+  document.getElementById('admin-person-form').scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
+function cancelPersonForm() { document.getElementById('admin-person-form').style.display='none'; }
+
+function savePersonForm() {
+  var id   = document.getElementById('person-form-id').value.trim();
+  var name = document.getElementById('person-form-name').value.trim();
+  if (!name) { alert('Name is required.'); return; }
+  var people = loadPeopleData(); var isNew = !id;
+  if (isNew) id = name.split(' ')[0].toLowerCase().replace(/[^a-z]/g,'') + '_' + Date.now().toString(36);
+  var existing = people.find(function(x){return x.id===id;});
+  var p = { id:id, name:name, role:document.getElementById('person-form-role').value.trim(), photo:document.getElementById('person-form-photo').value.trim(), teamId:document.getElementById('person-form-team').value, sortOrder:existing?existing.sortOrder:people.length+1 };
+  if (isNew) { people.push(p); } else { var ix=people.findIndex(function(x){return x.id===id;}); if(ix>=0) people[ix]=p; else people.push(p); }
+  savePeopleData(people); cancelPersonForm(); renderAdminPeopleList(); renderPeopleGrid(); renderTeamGrids();
+}
+
+function deletePersonAdmin(id) {
+  if (!confirm('Remove this person? This cannot be undone.')) return;
+  savePeopleData(loadPeopleData().filter(function(p){return p.id!==id;}));
+  renderAdminPeopleList(); renderPeopleGrid(); renderTeamGrids();
+}
+
 
 // ======================== FAQ ========================
 
@@ -2682,6 +2713,8 @@ function editFaqEntry(id) {
 function archiveFaqEntry(id) {
   var entries = loadFaqEntries().map(function(e) { return e.id === id ? Object.assign({}, e, {archived: !e.archived}) : e; });
   saveFaqEntries(entries);
+  renderTeamGrids();
+  renderPeopleGrid();
   renderFaqEntries(); renderAdminFaqList();
 }
 
@@ -2713,8 +2746,7 @@ function renderAdminFaqList() {
   var btnStyle = 'padding:3px 8px;border:1px solid var(--divider);border-radius:var(--radius-sm);background:none;cursor:pointer;color:var(--muted);font-size:10px;font-family:inherit;';
   var html = '';
   active.forEach(function(e) {
-    var t = TEAM_COLORS[e.team] || TEAM_COLORS.all;
-    var label = TEAM_LABELS[e.team] || 'All';
+    var _tm = getTeamsMap(); var t = _tm[e.team] || _tm['all']; var label = t.label || 'All';
     html += '<div style="display:flex;align-items:flex-start;justify-content:space-between;padding:10px 14px;background:var(--card-bg);border:1px solid var(--divider);border-radius:var(--radius-sm);margin-bottom:6px;">' +
       '<div style="flex:1;min-width:0;">' +
         '<div style="font-weight:700;font-size:12px;color:var(--heading);margin-bottom:2px;">' + escHtml(e.question) + '</div>' +
@@ -2763,6 +2795,8 @@ function submitAdminFaq() {
   document.getElementById('admin-faq-question').value = '';
   document.getElementById('admin-faq-answer').value = '';
   document.getElementById('admin-faq-team').value = 'all';
+  renderTeamGrids();
+  renderPeopleGrid();
   renderFaqEntries(); renderAdminFaqList();
 }
 }
@@ -2791,8 +2825,8 @@ function renderImpactEntries() {
     slide.style.minWidth = '100%';
     slide.style.paddingRight = '20px';
     var sc = IMPACT_STATUS_CONFIG[e.status] || IMPACT_STATUS_CONFIG.shipped;
-    var tc = TEAM_COLORS[e.team] || TEAM_COLORS.all;
-    var badge = (e.team && e.team !== 'all') ? '<span style="background:' + tc.bg + ';color:' + tc.color + ';border:1px solid ' + tc.border + ';padding:2px 8px;border-radius:100px;font-size:9px;font-weight:700;margin-left:6px;">' + escHtml(TEAM_LABELS[e.team] || e.team) + '</span>' : '';
+    var _tm2 = getTeamsMap(); var tc = _tm2[e.team] || _tm2['all'];
+    var badge = (e.team && e.team !== 'all') ? '<span style="background:' + tc.colorBg + ';color:' + tc.color + ';border:1px solid ' + tc.colorBorder + ';padding:2px 8px;border-radius:100px;font-size:9px;font-weight:700;margin-left:6px;">' + escHtml(tc.label || e.team) + '</span>' : '';
     var quot = e.testimonial ? '<div style="border-left:3px solid var(--purple);padding:10px 14px;background:var(--purple-bg);border-radius:0 8px 8px 0;">' +
       '<p style="font-size:11px;color:var(--heading);line-height:1.6;font-style:italic;margin-bottom:6px;">"' + escHtml(e.testimonial) + '"</p>' +
       (e.testimonialAuthor ? '<div style="font-weight:700;font-size:11px;color:var(--purple);">' + escHtml(e.testimonialAuthor) + '</div>' : '') +
@@ -3044,7 +3078,7 @@ document.addEventListener('DOMContentLoaded', function() {
       notes: ''
     }));
   }
-  ['central','techpmo','casino','international','marketing','data','assurance'].forEach(renderTeamTile);
+
   // Seed FAQ entries if none exist
   if (!localStorage.getItem('pmo_feed_entries')) {
     localStorage.setItem('pmo_feed_entries', JSON.stringify([
@@ -3081,7 +3115,49 @@ document.addEventListener('DOMContentLoaded', function() {
       { id: 4, question: 'How do I work with a department team?', answer: "Department directors (Casino, Tech, Data, Marketing) are embedded in your organisation. Reach out directly via Slack. No intake form needed. For cross-department work, they'll route it to Central Projects.", team: 'all' }
     ]));
   }
+
+  // Seed teams if not present
+  if (!localStorage.getItem('pmo_teams')) {
+    localStorage.setItem('pmo_teams', JSON.stringify([
+      { id:'assurance',     label:'Strategy & Assurance', description:'Strategic initiatives and delivery assurance.',    color:'#059669', colorBg:'#F0FDF4', colorBorder:'#A3E0B0', iconId:'i-shield',  row:'top',    order:1 },
+      { id:'central',       label:'Central Projects',     description:'Cross-functional delivery and exec-sponsored programmes.', color:'#6941C6', colorBg:'#F4F3FF', colorBorder:'#E9D7FE', iconId:'i-layers',  row:'top',    order:2 },
+      { id:'international', label:'International',        description:'Market expansion, licensing, and localisation.',  color:'#2563EB', colorBg:'#EFF8FF', colorBorder:'#B2DDFF', iconId:'i-globe',   row:'top',    order:3 },
+      { id:'tech',          label:'Tech',                 description:'Engineering, infrastructure, and tech delivery.', color:'#DC6803', colorBg:'#FFF3E0', colorBorder:'#FDD9A3', iconId:'i-code',    row:'bottom', order:1 },
+      { id:'casino',        label:'Casino',               description:'Casino delivery and operations.',                 color:'#7C3AED', colorBg:'#EDE9FE', colorBorder:'#C4B5FD', iconId:'i-target',  row:'bottom', order:2 },
+      { id:'data',          label:'Data',                 description:'Data projects and analytics.',                   color:'#0891B2', colorBg:'#E0F2FE', colorBorder:'#7DD3FC', iconId:'i-chart',   row:'bottom', order:3 },
+      { id:'marketing',     label:'Marketing',            description:'Revenue and marketing delivery.',                 color:'#F04438', colorBg:'#FEF3F2', colorBorder:'#FECDCA', iconId:'i-send',    row:'bottom', order:4 }
+    ]));
+  }
+  // Seed people if not present
+  if (!localStorage.getItem('pmo_people')) {
+    localStorage.setItem('pmo_people', JSON.stringify([
+      { id:'mary',    name:'Mary Macbeth',         role:'VP, PMO',                                 photo:'https://avatars.slack-edge.com/2025-10-20/9742690562033_761ffeccc0ce570ff667_72.jpg',   teamId:'central',       sortOrder:1 },
+      { id:'nick',    name:'Nick Robinson',        role:'Senior Director, Central Projects',       photo:'https://avatars.slack-edge.com/2026-03-24/10777711388129_5320eae749918c6cd1ab_72.jpg',   teamId:'central',       sortOrder:2 },
+      { id:'elliot',  name:'Elliot Walker',        role:'Project Manager, Central Projects',       photo:'https://avatars.slack-edge.com/2026-03-02/10595661687959_73956cec2f90a2e83e7e_72.jpg',   teamId:'central',       sortOrder:3 },
+      { id:'shannon', name:'Shannon Greenwood',    role:'Project Manager, Central Projects',       photo:'https://avatars.slack-edge.com/2026-05-05/11057449703302_3d624808c33e4b309738_72.png',   teamId:'central',       sortOrder:4 },
+      { id:'julie',   name:'Julie Cokotis',        role:'Senior Director, Strategic Initiatives', photo:'https://avatars.slack-edge.com/2023-06-14/5422396896630_18310f9bbfdb1ccd2f9e_72.png',    teamId:'assurance',     sortOrder:1 },
+      { id:'james',   name:'James Hirst',          role:'Senior Director, PMO Assurance',         photo:'https://avatars.slack-edge.com/2026-03-09/10675139248017_272f38a10c087372d3ff_72.png',   teamId:'assurance',     sortOrder:2 },
+      { id:'larissa', name:'Larissa Lombardo',     role:'Project Manager, International',         photo:'https://avatars.slack-edge.com/2026-02-10/10477641649605_91c502f0e817cb514c46_72.png',   teamId:'international', sortOrder:1 },
+      { id:'brad',    name:'Brad Lackey',          role:'Director, Tech',                         photo:'https://avatars.slack-edge.com/2026-04-08/10898693547424_9075b948d9c5024bf159_72.jpg',   teamId:'tech',          sortOrder:1 },
+      { id:'sonia',   name:'Sonia Golawska',       role:'Project Manager, Tech',                  photo:'https://avatars.slack-edge.com/2024-07-29/7490311061445_2e2b9c5d77d3939c0ec6_72.jpg',   teamId:'tech',          sortOrder:2 },
+      { id:'piotr',   name:'Piotr Barczycki',      role:'Technical Project Manager, Tech',        photo:'https://avatars.slack-edge.com/2025-02-03/8390986869523_a997dded665dd13609c6_72.jpg',   teamId:'tech',          sortOrder:3 },
+      { id:'adriane', name:'Adriane Rosen',        role:'Director, Casino',                       photo:'https://avatars.slack-edge.com/2026-03-02/10613326884530_c7e6cc9e1ab6f12bc9b6_72.jpg',  teamId:'casino',        sortOrder:1 },
+      { id:'luke',    name:"Luke Borg D'Anastasi", role:'Director, Data',                         photo:'https://avatars.slack-edge.com/2026-02-09/10469653376499_db307af83465f456603b_72.png',   teamId:'data',          sortOrder:1 },
+      { id:'imogen',  name:'Imogen Weaver',        role:'Data',                                   photo:'https://avatars.slack-edge.com/2023-12-04/6289197624099_dc0cc1c7c0953792d29e_72.jpg',   teamId:'data',          sortOrder:2 },
+      { id:'justine', name:'Justine King',         role:'Director, Revenue & Marketing Delivery', photo:'https://avatars.slack-edge.com/2026-04-20/10952597835650_d8ba220200503c0fbf1a_72.jpg',  teamId:'marketing',     sortOrder:1 }
+    ]));
+  }
+  // Migrate ttile_techpmo to ttile_tech if needed
+  (function() {
+    try {
+      if (!localStorage.getItem('ttile_tech') && localStorage.getItem('ttile_techpmo')) {
+        localStorage.setItem('ttile_tech', localStorage.getItem('ttile_techpmo'));
+      }
+    } catch(e) {}
+  })();
   // Render dynamic sections
+  renderTeamGrids();
+  renderPeopleGrid();
   renderFaqEntries();
   renderImpactEntries();
   renderAdminFaqList();
@@ -3089,27 +3165,9 @@ document.addEventListener('DOMContentLoaded', function() {
   // Render feed entries
   renderFeedEntries();
   renderAdminFeedList();
-  // Inject edit buttons into Team tab person cards
-  Object.keys(PERSON_DATA).forEach(function(slug) {
-    var pd = PERSON_DATA[slug];
-    document.querySelectorAll('#tab-team .team-name').forEach(function(nameEl) {
-      if (nameEl.textContent.trim() === pd.name) {
-        var card = nameEl.closest('.card');
-        if (card && !document.getElementById('pbio-' + slug)) {
-          card.id = 'pcard-' + slug;
-          var bioDiv = document.createElement('div');
-          bioDiv.id = 'pbio-' + slug;
-          var btn = document.createElement('button');
-          btn.className = 'btn-edit-person';
-          btn.innerHTML = '&#9998; Edit profile';
-          btn.onclick = function() { editPerson(slug, pd.team); };
-          card.appendChild(bioDiv);
-          card.appendChild(btn);
-          renderPersonCard(slug);
-        }
-      }
-    });
-  });
+  renderAdminTeamsList();
+  renderAdminPeopleList();
+
 });
 
 // Intersection Observer for fade-in

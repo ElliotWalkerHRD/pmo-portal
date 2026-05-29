@@ -512,8 +512,8 @@
 
   /* ============ FOOTER ============ */
   .footer {
-    background: var(--dark-bg); border-radius: var(--radius);
-    padding: 36px 32px; text-align: center;
+    background: var(--dark-bg);
+    padding: 48px 32px; text-align: center;
     position: relative; overflow: hidden;
   }
   .footer::before {
@@ -1866,16 +1866,17 @@
     </div><!-- close content panel -->
   </div><!-- close admin tab -->
 
-  <!-- ==================== FOOTER ==================== -->
-  <div class="footer">
-    <div style="margin-bottom:16px;">
-      <span style="display:inline-block;background:var(--purple);border-radius:6px;padding:4px 14px;font-size:10px;font-weight:800;color:#fff;letter-spacing:2px;text-transform:uppercase;">PMO</span>
-    </div>
-    <h3>Always in Delivery Mode.</h3>
-    <p class="tagline">Last updated: <span id="last-updated-date">29 May 2026</span>.</p>
-    <p class="links">#hrd-pmo &nbsp;|&nbsp; Confluence: HRDPMO &nbsp;|&nbsp; Dashboard: pmo.hrd-usa.com</p>
-  </div>
 
+</div>
+
+<!-- ==================== FOOTER ==================== -->
+<div class="footer">
+  <div style="margin-bottom:16px;">
+    <span style="display:inline-block;background:var(--purple);border-radius:6px;padding:4px 14px;font-size:10px;font-weight:800;color:#fff;letter-spacing:2px;text-transform:uppercase;">PMO</span>
+  </div>
+  <h3>Always in Delivery Mode.</h3>
+  <p class="tagline">Last updated: <span id="last-updated-date">29 May 2026</span>.</p>
+  <p class="links">#hrd-pmo &nbsp;|&nbsp; Confluence: HRDPMO &nbsp;|&nbsp; Dashboard: pmo.hrd-usa.com</p>
 </div>
 
 <script>
@@ -2612,7 +2613,6 @@ function renderPeopleGrid() {
       '<div class="team-role">' + escHtml(p.role||'') + '</div>' +
       '<div style="display:flex;flex-wrap:wrap;justify-content:center;gap:2px;margin-top:6px;">' + teamBadgesHtml + '</div>' +
       '<div id="pbio-' + escHtml(p.id) + '"></div>' +
-      '<button class="btn-edit-person" onclick="editPerson(' + JSON.stringify(p.id) + ',' + JSON.stringify(ptids[0]||'') + ')">&#9998; Edit profile</button>' +
     '</div>';
   }).join('');
   var h = document.getElementById('people-count-heading');

@@ -108,6 +108,10 @@
     0%, 100% { opacity: 1; transform: scale(1); }
     50% { opacity: 0.6; transform: scale(0.85); }
   }
+  @keyframes livePulse {
+    0% { transform: scale(1); opacity: 0.6; }
+    100% { transform: scale(2.6); opacity: 0; }
+  }
 
   .hero h1 {
     font-family: 'Space Grotesk', sans-serif;
@@ -2288,7 +2292,16 @@ function renderFeedEntries() {
   }
   var html='';
   if(upcoming.length){
-    html+='<div class="feed-month" style="margin-top:0;color:#B54708;background:#FFFAEB;border-color:#FEDF89;border-radius:4px;padding:8px 12px;">Upcoming announcements</div>';
+    html+='<div style="margin:0 0 4px;background:linear-gradient(135deg,#0F172A 0%,#1E0A4A 100%);border-radius:10px;padding:18px 22px;display:flex;align-items:center;gap:16px;">' +
+      '<div style="position:relative;flex-shrink:0;width:12px;height:12px;">' +
+        '<span style="display:block;width:12px;height:12px;border-radius:50%;background:#17B26A;position:relative;z-index:1;"></span>' +
+        '<span style="display:block;position:absolute;inset:-4px;border-radius:50%;background:rgba(23,178,106,0.45);animation:livePulse 1.8s ease-out infinite;"></span>' +
+      '</div>' +
+      '<div>' +
+        '<div style="font-size:14px;font-weight:800;color:#fff;letter-spacing:-0.2px;">Locked &amp; Loading</div>' +
+        '<div style="font-size:11px;color:rgba(255,255,255,0.45);margin-top:3px;font-weight:500;">Announcements dropping soon</div>' +
+      '</div>' +
+    '</div>';
     upcoming.forEach(function(e){html+=_buildFeedEntry(e);});
   }
   var groups={};

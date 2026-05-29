@@ -1698,7 +1698,17 @@
     <!-- ===== CONTENT MANAGEMENT PANEL ===== -->
     <div id="admin-panel-content" class="admin-subpanel">
 
-      <div class="section">
+      <!-- Content section quick-jump nav -->
+      <div id="content-section-jumper" style="position:sticky;top:51px;z-index:50;background:var(--bg);padding:10px 0 14px;margin-bottom:8px;border-bottom:1px solid var(--divider);">
+        <div style="font-size:9px;font-weight:800;color:var(--very-muted);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px;">Jump to</div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;">
+          <button id="content-nav-feed" onclick="scrollToContentSection('content-section-feed')" style="padding:5px 14px;border-radius:100px;font-size:11px;font-weight:700;border:1px solid var(--divider);background:var(--card-bg);color:var(--muted);cursor:pointer;font-family:inherit;transition:all 0.15s;" onmouseover="this.style.borderColor='var(--purple)';this.style.color='var(--purple)'" onmouseout="this.style.borderColor='var(--divider)';this.style.color='var(--muted)'">Delivery Feed</button>
+          <button id="content-nav-faq" onclick="scrollToContentSection('content-section-faq')" style="padding:5px 14px;border-radius:100px;font-size:11px;font-weight:700;border:1px solid var(--divider);background:var(--card-bg);color:var(--muted);cursor:pointer;font-family:inherit;transition:all 0.15s;" onmouseover="this.style.borderColor='var(--purple)';this.style.color='var(--purple)'" onmouseout="this.style.borderColor='var(--divider)';this.style.color='var(--muted)'">FAQ</button>
+          <button id="content-nav-impact" onclick="scrollToContentSection('content-section-impact')" style="padding:5px 14px;border-radius:100px;font-size:11px;font-weight:700;border:1px solid var(--divider);background:var(--card-bg);color:var(--muted);cursor:pointer;font-family:inherit;transition:all 0.15s;" onmouseover="this.style.borderColor='var(--purple)';this.style.color='var(--purple)'" onmouseout="this.style.borderColor='var(--divider)';this.style.color='var(--muted)'">Impact</button>
+        </div>
+      </div>
+
+      <div id="content-section-feed" class="section">
         <div class="section-label">Delivery Feed</div>
         <h2 class="section-title">Add a feed entry</h2>
         <p class="section-subtitle">Add updates to the public-facing delivery feed.</p>
@@ -1724,7 +1734,7 @@
 
       <div class="section-divider"></div>
 
-      <div class="section">
+      <div id="content-section-faq" class="section">
         <div class="section-label">FAQ</div>
         <h2 class="section-title">Manage FAQs</h2>
         <p class="section-subtitle">Add questions that appear on the home page. Tag to a specific team to show a capsule badge.</p>
@@ -1751,7 +1761,7 @@
 
       <div class="section-divider"></div>
 
-      <div class="section">
+      <div id="content-section-impact" class="section">
         <div class="section-label">Impact</div>
         <h2 class="section-title">Add an impact story</h2>
         <p class="section-subtitle">Showcase PMO delivery. Stories appear in the Impact carousel on the home page.</p>
@@ -1978,7 +1988,7 @@ function switchAdminPanel(panelId, btn) {
   document.getElementById('admin-panel-' + panelId).classList.add('active');
   btn.classList.add('active');
   if (panelId === 'people') { renderAdminTeamsList(); renderAdminPeopleList(); }
-  if (panelId === 'content') { renderAdminFeedList(); renderAdminFaqList(); renderAdminImpactList(); }
+  if (panelId === 'content') { renderAdminFeedList(); renderAdminFaqList(); renderAdminImpactList(); renderContentNavCounts(); }
 }
 
 // Team space expand/collapse
@@ -2663,6 +2673,26 @@ function renderHeroStats() {
   if (th) th.textContent = teams.length + ' teams, one PMO';
 }
 
+function renderContentNavCounts() {
+  var feedCount = loadFeedEntries().filter(function(e){ return !e.archived; }).length;
+  var faqCount = loadFaqEntries().length;
+  var impactCount = loadImpactEntries().length;
+  var fb = document.getElementById('content-nav-feed');
+  var qb = document.getElementById('content-nav-faq');
+  var ib = document.getElementById('content-nav-impact');
+  if (fb) fb.textContent = 'Delivery Feed (' + feedCount + ')';
+  if (qb) qb.textContent = 'FAQ (' + faqCount + ')';
+  if (ib) ib.textContent = 'Impact (' + impactCount + ')';
+}
+
+function scrollToContentSection(id) {
+  var el = document.getElementById(id);
+  if (!el) return;
+  var offset = 80; // account for sticky tab bar + jumper bar
+  var top = el.getBoundingClientRect().top + window.scrollY - offset;
+  window.scrollTo({ top: top, behavior: 'smooth' });
+}
+
 // ======================== TEAMS ADMIN ========================
 
 function renderAdminTeamsList() {
@@ -2922,6 +2952,7 @@ function renderAdminFaqList() {
     html += '</div>';
   }
   el.innerHTML = html;
+  renderContentNavCounts();
 }
 
 function submitAdminFaq() {
@@ -3076,6 +3107,7 @@ function renderAdminImpactList() {
     html += '</div>';
   }
   el.innerHTML = html;
+  renderContentNavCounts();
 }
 
 function submitAdminImpact() {
@@ -3200,6 +3232,7 @@ function renderAdminFeedList() {
     html += '</div>';
   }
   el.innerHTML = html;
+  renderContentNavCounts();
 }
 
 function submitAdminFeedEntry() {

@@ -2250,8 +2250,9 @@ function loadFeedEntries() {
 }
 
 function deleteFeedEntry(id) {
+  if (!confirm('Delete this entry? This cannot be undone.')) return;
   localStorage.setItem('pmo_feed_entries', JSON.stringify(loadFeedEntries().filter(function(e) { return e.id !== id; })));
-  renderFeedEntries(); renderTicker(); touchLastUpdated();
+  renderFeedEntries(); renderAdminFeedList(); renderTicker(); touchLastUpdated();
 }
 
 var feedTypeConfig = {

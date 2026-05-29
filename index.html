@@ -389,6 +389,15 @@
   .feed-tag-milestone { background: var(--card-bg); color: var(--purple); }
   .feed-tag-process { background: var(--blue-bg); color: #2563EB; }
   .feed-tag-capability { background: var(--orange-bg); color: #DC6803; }
+  .feed-entry-new .feed-content {
+    background: rgba(105,65,198,0.05);
+    border: 1px solid rgba(105,65,198,0.2);
+    border-radius: 10px;
+    padding: 12px 14px 12px;
+    margin-bottom: 20px;
+  }
+  .feed-entry-new .feed-content .feed-title { font-size: 15px; }
+  .feed-entry-new .feed-content .feed-date { color: var(--purple); font-weight: 700; }
   .feed-month {
     font-weight: 800; font-size: 12px; color: var(--heading);
     letter-spacing: 2px; text-transform: uppercase;
@@ -2283,11 +2292,25 @@ var feedTypeConfig = {
   capability: { dot: ' feed-dot-orange', tag: 'New Capability',cls: 'feed-tag-capability' }
 };
 
+function _isFreshEntry(e) {
+  return !!(e.addedAt && (Date.now() - e.addedAt < 86400000));
+}
 function _buildFeedEntry(e) {
   var c = feedTypeConfig[e.type] || feedTypeConfig.milestone;
-  return '<div class="feed-entry" data-type="' + escHtml(e.type) + '">' +
+  var isFresh = _isFreshEntry(e);
+  var freshBadge = isFresh
+    ? '<div style="display:inline-flex;align-items:center;gap:5px;margin-bottom:8px;">' +
+        '<div style="position:relative;width:7px;height:7px;flex-shrink:0;">' +
+          '<span style="display:block;width:7px;height:7px;border-radius:50%;background:#6941C6;position:relative;z-index:1;"></span>' +
+          '<span style="display:block;position:absolute;inset:-3px;border-radius:50%;background:rgba(105,65,198,0.35);animation:livePulse 2s ease-out infinite;"></span>' +
+        '</div>' +
+        '<span style="font-size:9px;font-weight:800;color:#6941C6;letter-spacing:1.5px;text-transform:uppercase;">Just In</span>' +
+      '</div>'
+    : '';
+  return '<div class="feed-entry' + (isFresh ? ' feed-entry-new' : '') + '" data-type="' + escHtml(e.type) + '">' +
     '<div class="feed-timeline"><div class="feed-dot' + c.dot + '"></div><div class="feed-line"></div></div>' +
     '<div class="feed-content">' +
+      freshBadge +
       '<div class="feed-date">' + escHtml(e.date) + '</div>' +
       '<div class="feed-title">' + escHtml(e.title) + '</div>' +
       (e.desc ? '<div class="feed-desc">' + escHtml(e.desc) + '</div>' : '') +
@@ -3278,7 +3301,7 @@ function submitAdminFeedEntry() {
     var btn = document.getElementById('admin-feed-submit-btn');
     if (btn) btn.textContent = 'Add to Feed';
   } else {
-    entries.unshift({ date:date, dateIso:dateIso, title:title, desc:desc, type:type, upcoming:upcoming, createdAt:createdAt, id:Date.now() });
+    entries.unshift({ date:date, dateIso:dateIso, title:title, desc:desc, type:type, upcoming:upcoming, createdAt:createdAt, addedAt:Date.now(), id:Date.now() });
   }
   localStorage.setItem('pmo_feed_entries', JSON.stringify(entries));
   document.getElementById('admin-feed-date').value = '';

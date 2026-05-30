@@ -1652,7 +1652,11 @@
         <div class="tspace-section-label">Role / Title</div>
         <input type="text" id="person-form-role" class="modal-input" placeholder="e.g. Director, Casino" style="margin-bottom:12px;">
         <div class="tspace-section-label">Photo URL</div>
-        <input type="text" id="person-form-photo" class="modal-input" placeholder="https://avatars.slack-edge.com/..." style="margin-bottom:16px;">
+        <input type="text" id="person-form-photo" class="modal-input" placeholder="https://avatars.slack-edge.com/..." style="margin-bottom:12px;">
+        <div class="tspace-section-label">Short bio (optional)</div>
+        <textarea id="person-form-bio" class="modal-input" rows="2" placeholder="One or two lines about this person..." style="resize:vertical;margin-bottom:12px;"></textarea>
+        <div class="tspace-section-label">Currently working on (optional)</div>
+        <input type="text" id="person-form-focus" class="modal-input" placeholder="e.g. EDD programme, Hackathon" style="margin-bottom:16px;">
         <div style="display:flex;gap:8px;">
           <button onclick="cancelPersonForm()" style="flex:1;padding:9px;border:1px solid var(--divider);border-radius:var(--radius-sm);background:var(--card-bg);color:var(--muted);font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;">Cancel</button>
           <button onclick="savePersonForm()" style="flex:1;padding:9px;border:none;border-radius:var(--radius-sm);background:var(--purple);color:#fff;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;">Save Person</button>
@@ -2531,6 +2535,7 @@ function renderPeopleGrid() {
       '<div class="team-role">' + escHtml(p.role||'') + '</div>' +
       '<div style="display:flex;flex-wrap:wrap;justify-content:center;gap:2px;margin-top:6px;">' + teamBadgesHtml + '</div>' +
       '<div id="pbio-' + escHtml(p.id) + '"></div>' +
+      '<button class="btn-edit-person" onclick="editPerson(' + JSON.stringify(p.id) + ',' + JSON.stringify(ptids[0]||'') + ')">&#9998; Edit profile</button>' +
     '</div>';
   }).join('');
   var h = document.getElementById('people-count-heading');
@@ -2690,7 +2695,8 @@ function populateTeamSelect(selId, selTeamId) {
 function showAddPersonForm() {
   document.getElementById('admin-person-form-title').textContent = 'Add Person';
   document.getElementById('person-form-id').value = '';
-  ['person-form-name','person-form-role','person-form-photo'].forEach(function(id){document.getElementById(id).value='';});
+  ['person-form-name','person-form-role','person-form-photo','person-form-focus'].forEach(function(id){document.getElementById(id).value='';});
+  document.getElementById('person-form-bio').value = '';
   populateTeamSelect('person-form-team','');
   populateTeamSelect('person-form-team2','');
   document.getElementById('admin-person-form').style.display='block';
@@ -2704,6 +2710,9 @@ function editPersonAdmin(id) {
   document.getElementById('person-form-name').value = p.name||'';
   document.getElementById('person-form-role').value = p.role||'';
   document.getElementById('person-form-photo').value = p.photo||'';
+  var _pcd = loadPersonData(p.id);
+  document.getElementById('person-form-bio').value = _pcd.bio||'';
+  document.getElementById('person-form-focus').value = _pcd.focus||'';
   populateTeamSelect('person-form-team', p.teamId||'');
   populateTeamSelect('person-form-team2', (p.teamIds && p.teamIds[1]) || '');
   document.getElementById('admin-person-form').style.display='block';
@@ -2723,6 +2732,9 @@ function savePersonForm() {
   var newTeamIds=[t1,t2].filter(Boolean);
   var p = { id:id, name:name, role:document.getElementById('person-form-role').value.trim(), photo:document.getElementById('person-form-photo').value.trim(), teamId:newTeamIds[0]||'', teamIds:newTeamIds, sortOrder:existing?existing.sortOrder:people.length+1 };
   if (isNew) { people.push(p); } else { var ix=people.findIndex(function(x){return x.id===id;}); if(ix>=0) people[ix]=p; else people.push(p); }
+  var _bio = document.getElementById('person-form-bio').value.trim();
+  var _focus = document.getElementById('person-form-focus').value.trim();
+  localStorage.setItem('pcard_' + id, JSON.stringify({ bio: _bio, focus: _focus }));
   savePeopleData(people); cancelPersonForm(); renderAdminPeopleList(); renderPeopleGrid(); renderTeamGrids(); renderTeamSpaces();
 }
 
@@ -3263,7 +3275,27 @@ document.addEventListener('DOMContentLoaded', function() {
     var _toAdd = _newImp.filter(function(e) { return _impIds.indexOf(e.id) === -1; });
     if (_toAdd.length) saveImpactEntries(_imp.concat(_toAdd));
     localStorage.setItem('pmo_impact_v2', '1');
-  }  if (!localStorage.getItem('pmo_faq_entries')) {
+  }
+  // Impact v3 — replace all entries with real project data
+  if (!localStorage.getItem('pmo_impact_v3')) {
+    localStorage.setItem('pmo_impact_entries', JSON.stringify([
+      { id:1,  title:'Crypto Deposits — Phase 1', description:'Enabling cryptocurrency deposits across US jurisdictions via Pay.com and Zero Hash. Illinois first — IGB regulatory approval confirmed. ZH MSA and integration build in progress. Florida and New Jersey to follow. Go-live target: 31 Aug 2026.', testimonial:'', testimonialAuthor:'', testimonialRole:'', status:'execution', statusDate:'Since Mar 2026', team:'central', createdAt:1774353600000 },
+      { id:2,  title:'EDD — Enhanced Due Diligence', description:'Redesigning how HRD collects financial documentation from high-value customers who hit net loss thresholds. Shifting from reactive document requests to a proactive in-app flow positioned as a VIP experience enhancement. Phase 1 targets 21 Jul 2026. Phase 2 (Au10tix integration) follows 18 Aug 2026.', testimonial:'', testimonialAuthor:'', testimonialRole:'', status:'execution', statusDate:'Since Apr 2026', team:'central', createdAt:1775649600000 },
+      { id:3,  title:'Bonus Cash — Multi-State Launch', description:'Promotional mechanic enabling controlled bonus cash allocation for VIP customers across FL, NJ, MI, and OH. Florida approved Apr 2026. NJ and Michigan internal QA complete as of 29 May 2026. Five workstreams coordinated across Compliance, Engineering, Finance, CRM, and Customer Support. VIP go-live targeting 26 Jun 2026.', testimonial:'', testimonialAuthor:'', testimonialRole:'', status:'execution', statusDate:'Since Apr 2026', team:'central', createdAt:1776254400000 },
+      { id:4,  title:'Player Monitoring Review (PMR)', description:'Redesigned the player monitoring review process end to end. Consolidated five fragmented systems into a single workflow. Delivered on time with zero regulatory findings post-launch.', testimonial:'', testimonialAuthor:'', testimonialRole:'', status:'shipped', statusDate:'Apr 2026', team:'central', createdAt:1775649600000 },
+      { id:5,  title:'Centralised Procurement', description:'Establishing a dedicated procurement function to bring visibility and control to approximately $600m of annual spend across 1,100+ contracts. Business case for a Senior Procurement Lead submitted to CFO and COO. Phase 1 covers exec alignment, spend analysis, and vendor categorisation.', testimonial:'', testimonialAuthor:'', testimonialRole:'', status:'execution', statusDate:'Since May 2026', team:'central', createdAt:1778587200000 },
+      { id:6,  title:'HRD AI Innovation Hackathon', description:'Cross-functional AI innovation programme accepted through PMO intake. Nine workstreams structured from the v2.0 implementation pack. PMO providing delivery coordination and programme oversight. Target: week commencing 14 Jul 2026.', testimonial:'', testimonialAuthor:'', testimonialRole:'', status:'execution', statusDate:'Since May 2026', team:'central', createdAt:1778673600000 },
+      { id:7,  title:'PMO Intake & Triage', description:'Single intake channel in #hrd-pmo with Slack workflow automation, auto Jira ticket creation, and a 48-hour triage SLA. Replaced a fragmented, untracked intake process. 100% SLA hit rate since launch.', testimonial:'', testimonialAuthor:'', testimonialRole:'', status:'shipped', statusDate:'Apr 2026', team:'central', createdAt:1775822400000 },
+      { id:10, title:'Ontario — iGaming Market Entry', description:'Multi-workstream programme coordinating HRD\'s entry into the Ontario iGaming market. Covering licensing, platform localisation, responsible gambling compliance, and payment integration for a regulated Canadian jurisdiction.', testimonial:'', testimonialAuthor:'', testimonialRole:'', status:'execution', statusDate:'Since Feb 2026', team:'international', createdAt:1771113600000 },
+      { id:11, title:'Sportsbook Rejection Rate Analytics', description:'Weekly rejection rate dashboard with 13-week trailing view, automated reporting, and anomaly detection. Established agreed parameters for rejection reasons within the trading team\'s control. Enables data-driven pricing and market coverage decisions.', testimonial:'', testimonialAuthor:'', testimonialRole:'', status:'shipped', statusDate:'May 2026', team:'data', createdAt:1775822400000 },
+      { id:12, title:'VTDS — Visual Theming Design System', description:'Building a unified component library across HRD\'s product surfaces. Standardises offer steppers, chip/badge components, and accordion patterns. Reduces frontend inconsistency and accelerates delivery across sportsbook and casino.', testimonial:'', testimonialAuthor:'', testimonialRole:'', status:'execution', statusDate:'Since Mar 2026', team:'tech', createdAt:1773532800000 },
+      { id:13, title:'Reward Series — CRM Promotions', description:'Enabling CMS promotions to be linked directly to Reward Series, allowing targeted promotional mechanics tied to specific loyalty programmes. Builds the foundation for personalised retention campaigns across sportsbook and casino.', testimonial:'', testimonialAuthor:'', testimonialRole:'', status:'execution', statusDate:'Since Apr 2026', team:'marketing', createdAt:1775649600000 },
+      { id:14, title:'PMO Operating Model', description:'Defined the HRD PMO operating model, intake process, project support levels, and governance framework from scratch. Established the central PMO in March 2026 with AI-assisted workflows from day one.', testimonial:'', testimonialAuthor:'', testimonialRole:'', status:'shipped', statusDate:'Mar 2026', team:'assurance', createdAt:1772366400000 },
+      { id:15, title:'Responsible Gaming — Account Restrictions', description:'Upgraded timeout and self-exclusion screens to use the new Account Restrictions API across sportsbook. Modernises the player protection architecture and enables consistent responsible gaming controls across all product surfaces.', testimonial:'', testimonialAuthor:'', testimonialRole:'', status:'execution', statusDate:'Since Apr 2026', team:'casino', createdAt:1775649600000 }
+    ]));
+    localStorage.setItem('pmo_impact_v3', '1');
+  }
+  if (!localStorage.getItem('pmo_faq_entries')) {
     localStorage.setItem('pmo_faq_entries', JSON.stringify([
       { id: 1, question: 'How do I submit a request?', answer: "Post in #hrd-pmo on Slack. A Jira ticket is created automatically. We triage within 48 hours and assign a PM if it's accepted.", team: 'all' },
       { id: 2, question: 'What kind of work does the PMO take on?', answer: "Work that crosses teams, needs dedicated project leadership, or is exec-sponsored. We don't manage team backlogs, run standups, or own product delivery.", team: 'all' },
